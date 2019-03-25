@@ -1,0 +1,13 @@
+table,
+th,
+td {
+    border: 0.01vw solid black;
+}
+
+td {
+    height: 5vw;
+    width: 5vw;
+}
+p {
+    font-size: 0.8vw;
+}
