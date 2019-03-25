@@ -1,0 +1,36 @@
+#menu ul {
+	margin:0;
+	padding:0;
+	list-style-type:none;
+	text-align:center;
+}
+#menu li {
+	float:left;
+	margin:auto;
+	padding:0;
+	
+}
+#menu li a {
+	display:block;
+	width:100px;
+	color:black;
+	background-color: inherit;
+	text-decoration:none;
+	padding:5px;
+}
+#menu li a:hover {
+	color:darkslategrey;
+}
+#menu ul li ul {
+	display:none;
+}
+#menu ul li:hover ul {
+	display:block;
+}
+#menu li:hover ul li {
+	float:none;
+}
+#menu li ul {
+	position:absolute;
+	background-color: inherit;
+}
