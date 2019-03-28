@@ -1,13 +1,13 @@
 <?PHP
 $err = false;
-if (!(file_exists("private")))
-	if (!(mkdir("private")))
+if (!(file_exists("../private")))
+	if (!(mkdir("../private")))
 		$err = true;
-if (!$err && !(file_exists("private/passwd")))
-	if (file_put_contents("private/passwd", "a:0:{}") == false)
+if (!$err && !(file_exists("../private/passwd")))
+	if (file_put_contents("../private/passwd", "a:0:{}") == false)
 		$err = true;
 
-$usersarr = unserialize(file_get_contents("private/passwd"));
+$usersarr = unserialize(file_get_contents("../private/passwd"));
 
 if (!$err && $_POST["submit"] == "OK")
 {
@@ -30,7 +30,7 @@ if (!$err && $_POST["submit"] == "OK")
 }
 if (!$err)
 {
-	if (file_put_contents("private/passwd", serialize($usersarr)) == false)
+	if (file_put_contents("../private/passwd", serialize($usersarr)) == false)
 		$err = true;
 }
 if ($err)
