@@ -12,7 +12,6 @@ if ($argc == 2)
 	{
 		$path = explode("/", $argv[1]);
 		$tab = array_map("trim", $tab);
-		//print_r($tab);
 		if (!file_exists($path[2]))
 			mkdir($path[2]);
 		foreach($tab as $imgloc)

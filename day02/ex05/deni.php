@@ -19,7 +19,6 @@ foreach($array as $val)
 }
 foreach($params as $key => $pname)
 {
-	//print("$pname\n");
 	foreach($array as $arrkey => $val)
 	{
 		${$pname}[$sortarr[$arrkey]] = $val[$key];
