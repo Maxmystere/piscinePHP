@@ -29,6 +29,8 @@ if (!$err && $_POST["submit"] == "OK")
 	else
 		$err = true;
 }
+else
+	$err = true;
 if (!$err)
 {
 	if (file_put_contents("../private/passwd", serialize($usersarr)) == false)
