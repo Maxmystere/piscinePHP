@@ -1,0 +1,11 @@
+<- Vertex ----------------------------------------------------------------------
+The Vertex class handles Vertex in 3D space.
+
+An instance can be contructed from distinct x, y, z, w constitutives:
+new Vertex( array( 'x' => 0.0, 'y' => 0.0, 'z' => 0.0 ) );
+And additionnaly a color:
+new Vertex( array( 'x' => 0.0, 'y' => 0.0, 'z' => 0.0, 'color' => $color ) );
+
+Positions are defined as float
+Any other use is undefined behaviour.
+---------------------------------------------------------------------- Vertex ->
