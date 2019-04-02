@@ -16,12 +16,14 @@ class Vertex
 	}
 	function __construct(array $kwargs) {
 		
-		if (array_key_exists('x', $kwargs))
+		if (array_key_exists('x', $kwargs) && array_key_exists('y', $kwargs) && array_key_exists('z', $kwargs))
+		{
 			$this->x = $kwargs['x'];
-		if (array_key_exists('y', $kwargs))
 			$this->y = $kwargs['y'];
-		if (array_key_exists('z', $kwargs))
 			$this->z = $kwargs['z'];
+		}
+		else
+			throw new Exception('Need x, y, z parameters');
 		if (array_key_exists('w', $kwargs))
 			$this->w = $kwargs['w'];
 		if (array_key_exists('color', $kwargs))
