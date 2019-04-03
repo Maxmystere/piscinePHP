@@ -1,0 +1,112 @@
+*{
+    font-family: 'Courgette', cursive;
+}
+html, body{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(221, 220, 220);
+}
+.header{
+    background-color: palegoldenrod;
+    text-align: center;
+    max-height: 260px;
+    border-bottom-style: solid;
+    border-width: 1px;
+    border-color: rgb(109,109,109);
+}
+.header img{
+	max-width: 500px;
+    width: 100%;
+    height: auto;
+}
+.header a{
+    color: black;
+    text-decoration: none;
+    margin: 10px;
+}
+.table-header {
+    background-color: #95A5A6;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+a:hover{
+    color:yellow;
+}
+.category{
+	background-color: lightyellow;
+    text-align: center;
+}
+.category a{
+    color: black;
+    padding-left: 30px;
+    text-decoration: none;
+}
+p{
+    margin: 0;
+    padding: 0;
+}
+
+.form_container form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 75%;
+    height: 50%;
+    margin: auto;
+}
+.form_container{
+    background-color: rgb(221, 220, 220);
+    text-align: center;
+    margin: auto;
+	margin-top: 40px;
+	max-width: 400px;
+	width: 100%;
+	height: 400px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 18px 19px 43px -10px rgba(0,0,0,0.71);
+}
+.img_container{
+    background-color: white;
+    text-align: center;
+    margin-top: 40px;
+    max-width: 500px;
+    width: 100%;
+    margin: auto;
+}
+.img_container img{
+	max-width: 250px;
+    width: 100%;
+}
+form input {
+    max-width: 300px;
+    text-align: center;
+    border-radius: 8px;
+}
+form button{
+    max-width: 300px;
+}
+#success_msg{
+    color: green;
+    text-align: center;
+}
+#create_fail{
+    color: red;
+    text-align: center;
+}
+.table_wrapper{
+    text-align: center;
+}
+table {
+    border: 5px solid black;
+}
+th,
+td {
+    border: 1px solid black;
+}
+td {
+    padding: 5px;
+}
