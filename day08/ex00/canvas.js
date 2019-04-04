@@ -40,12 +40,16 @@ window.onload = function () {
 			}
 			else {
 				if (board[ytmp][xtmp]['imgid'] != 0) {
+					board[ytmp][xtmp]['realshipx'] = xtmp;
+					board[ytmp][xtmp]['realshipy'] = ytmp;
 					for (var lily = 0; lily < board[ytmp][xtmp]['width']; lily++) {
 						for (var lilx = 0; lilx < board[ytmp][xtmp]['length']; lilx++) {
 							if (lily || lilx) {
 								console.log(lily + ' ' + lilx);
 								board[ytmp + lily][xtmp + lilx] = JSON.parse( JSON.stringify((board[ytmp][xtmp])));
 								board[ytmp + lily][xtmp + lilx]['imgid'] = 0;
+								board[ytmp + lily][xtmp + lilx]['realshipx'] = xtmp;
+								board[ytmp + lily][xtmp + lilx]['realshipy'] = ytmp;
 							}
 						}
 					}
@@ -66,13 +70,21 @@ window.onload = function () {
 	canvas.addEventListener('click', function (event) {
 		var x = event.pageX - event.pageX % (canvas.height / 100);
 		var y = event.pageY - event.pageY % (canvas.height / 100);
-		console.log(board[x / (canvas.height / 100)][y / (canvas.width / 150)]);
+		var curx = x / (canvas.height / 100);
+		var cury = y / (canvas.width / 150);
+		console.log(board[curx][cury]);
 		//drawMediumShip(canvas, ctx, image, x, y);
-		console.log("Click x : " + x / (canvas.height / 100) + " y : " + y / (canvas.width / 150));
-		if (board[x / (canvas.height / 100)][y / (canvas.width / 150)]) {
-			var tmp = board[x / (canvas.height / 100)][y / (canvas.width / 150)];
+		console.log("Click x : " + curx + " y : " + cury);
+		if (board[curx][cury]) {
+			var tmp = board[curx][cury];
 			document.getElementById("myForm").style.display = "block";
 			document.getElementById("shipnameform").innerHTML = tmp['name'];
+			document.getElementById("shiphpform").innerHTML = tmp['hp'] + " / " + tmp['maxhp']  + " HP";
+			document.getElementById("shipspeedform").innerHTML = tmp['speed'] + " km/h";
+			document.getElementById("shippowerform").innerHTML = tmp['pp'] + " PP";
+			document.getElementById('shipposform').innerHTML = "x: " + tmp['realshipx'] + " y: " + tmp['realshipy'];
+			document.getElementById('shipposxform').value = tmp['realshipx'];
+			document.getElementById('shipposyform').value = tmp['realshipy'];
 		}
 		else
 		{
@@ -80,3 +92,7 @@ window.onload = function () {
 		}
 	}, false);
 }
+
+function closeForm() {
+	document.getElementById("myForm").style.display = "none";
+  }

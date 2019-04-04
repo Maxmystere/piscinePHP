@@ -8,36 +8,24 @@ body {
 	background-color: #555;
 }
 
-/* Button used to open the contact form - fixed at the bottom of the page */
-.open-button {
-	background-color: #555;
-	color: white;
-	padding: 16px 20px;
-	border: none;
-	cursor: pointer;
-	opacity: 0.8;
-	position: fixed;
-	bottom: 23px;
-	right: 28px;
-	width: 280px;
-}
-
 /* The popup form - hidden by default */
 .form-popup {
 	display: none;
 	position: fixed;
 	bottom: 15px;
 	right: 15px;
-	border: 3px solid #f1f1f1;
+	border: 3px solid gainsboro;
 	z-index: 9;
+	padding: 10px;
+	background-color: white;
+	min-width: 300px;
+	min-height: 400px;
 }
 
 /* Add styles to the form container */
 .form-container {
-	max-width: 300px;
-	padding: 10px;
+	/*max-width: 300px;*/
 	margin: 0;
-	background-color: white;
 }
 
 /* Full-width input fields */
@@ -53,20 +41,25 @@ body {
 .form-container .btn {
 	background-color: #4CAF50;
 	color: white;
-	padding: 16px 20px;
+	
 	border: none;
 	cursor: pointer;
+	/*
+	padding: 16px 20px;
 	width: 100%;
-	margin-bottom:10px;
+	*/
 	opacity: 0.8;
 }
 
 /* Add a red background color to the cancel button */
-.form-container .cancel {
+.form-popup .cancel {
 	background-color: red;
+	opacity: 0.8;
+	order: none;
+	cursor: pointer;
 }
 
 /* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
+.form-popup .btn:hover, .open-button:hover {
 	opacity: 1;
 }
