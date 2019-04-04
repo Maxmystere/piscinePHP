@@ -1,8 +1,7 @@
 <?php session_start();
 require_once 'Board.class.php';
 $tmp = unserialize($_SESSION['board']);
-if (!$tmp)
-{
+if (!$tmp) {
 	header("Location: /install.php");
 	exit;
 }
@@ -22,9 +21,19 @@ if (!$tmp)
 
 	var board = 
 	<?PHP
-	$tmp->getJsonBoard();
-	?>;
+$tmp->getJsonBoard();
+?>;
 	</script>
+	<div class="form-popup" id="myForm">
+	<form action="/action_page.php" class="form-container">
+		<h2 id="shipnameform">Login</h2>
+
+		<input type="text" placeholder="Enter Email" name="email" required>
+
+		<button type="submit" class="btn">Validate</button>
+		<button type="submit" class="btn cancel" onclick="closeForm()">Close</button>
+	</form>
+	</div>
 </body>
 
 
