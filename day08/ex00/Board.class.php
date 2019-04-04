@@ -8,7 +8,7 @@ class Board
 	public $player2;
 	public $x = 150;
 	public $y = 100;
-	protected $board;
+	public $board;
 	function __construct()
 	{
 		$this->currentplayer = 0;
@@ -31,6 +31,10 @@ class Board
 					$this->board[$ytmp][$xtmp] = $this->player1->buildShip(array('name' => "Kind Vengeance", 'x' => $xtmp, 'y' => $ytmp));
 				}
 				else if ($xtmp == 10 && $ytmp == 15)
+				{
+					$this->board[$ytmp][$xtmp] = $this->player2->buildShip(array('name' => "Bad Vengeance", 'x' => $xtmp, 'y' => $ytmp));
+				}
+				else if ($xtmp == 135 && $ytmp == 15)
 				{
 					$this->board[$ytmp][$xtmp] = $this->player2->buildShip(array('name' => "Bad Vengeance", 'x' => $xtmp, 'y' => $ytmp));
 				}

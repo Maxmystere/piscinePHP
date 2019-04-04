@@ -62,7 +62,7 @@ window.onload = function () {
 			if (board[ytmp][xtmp] == 0) {
 			}
 			else {
-				if (board[ytmp][xtmp]['imgid'] != 0) {
+				if (board[ytmp][xtmp]['imgid'] != 0) {/*
 					for (var lily = 0; lily < board[ytmp][xtmp]['width']; lily++) {
 						for (var lilx = 0; lilx < board[ytmp][xtmp]['length']; lilx++) {
 							if (lily || lilx) {
@@ -70,25 +70,36 @@ window.onload = function () {
 								board[ytmp + lily][xtmp + lilx]['imgid'] = 0;
 							}
 						}
-					}
+					}*/
+					if (board[ytmp][xtmp]['rot'] == 2)
+						var boardx = (xtmp - 1) * (canvas.width / 150);
+					else
+						var boardx = xtmp * (canvas.width / 150);
+					if (board[ytmp][xtmp]['rot'] == 3)
+						var boardy = (ytmp - 1) * (canvas.height / 100);
+					else
+						var boardy = ytmp * (canvas.height / 100);
 				}
 				if (board[ytmp][xtmp]['imgid'] == 1) {
 					drawSmallShip(canvas, ctx,
 						(board[ytmp][xtmp]['team'] == 1 ? image : image2),
-						ytmp * canvas.height / 100,
-						xtmp * (canvas.width / 150, board[ytmp][xtmp]['rot']));
+						boardx,
+						boardy,
+						board[ytmp][xtmp]['rot']);
 				}
 				else if (board[ytmp][xtmp]['imgid'] == 2) {
 					drawMediumShip(canvas, ctx,
 						(board[ytmp][xtmp]['team'] == 1 ? image : image2),
-						ytmp * canvas.height / 100,
-						xtmp * (canvas.width / 150, board[ytmp][xtmp]['rot']));
+						boardx,
+						boardy,
+						board[ytmp][xtmp]['rot']);
 				}
 				else if (board[ytmp][xtmp]['imgid'] == 3) {
 					drawBigShip(canvas, ctx,
 						(board[ytmp][xtmp]['team'] == 1 ? image : image2),
-						ytmp * canvas.height / 100,
-						xtmp * (canvas.width / 150, board[ytmp][xtmp]['rot']));
+						boardx,
+						boardy,
+						board[ytmp][xtmp]['rot']);
 				}
 			}
 		}
@@ -99,16 +110,16 @@ window.onload = function () {
 		var y = event.pageY - event.pageY % (canvas.height / 100);
 		var curx = x / (canvas.height / 100);
 		var cury = y / (canvas.width / 150);
-		console.log(board[curx][cury]);
-		drawSmallShip(canvas, ctx, image, x, y, 4);
-		console.log("Click x : " + curx + " y : " + cury);
-		if (board[curx][cury]) {
-			var tmp = board[curx][cury];
+		console.log(board[cury][curx]);
+		//drawSmallShip(canvas, ctx, image, x, y, 4);
+		//console.log("Click x : " + curx + " y : " + cury);
+		if (board[cury][curx]) {
+			var tmp = board[cury][curx];
 			document.getElementById("myForm").style.display = "block";
 			document.getElementById("shipnameform").innerHTML = tmp['name'];
 			document.getElementById("shiphpform").innerHTML = tmp['hp'] + " / " + tmp['maxhp']  + " HP";
+			document.getElementById("shippowerform").innerHTML = tmp['pp'] + " / " + tmp['maxpp']  + " PP";
 			document.getElementById("shipspeedform").innerHTML = tmp['speed'] + " km/h";
-			document.getElementById("shippowerform").innerHTML = tmp['pp'] + " PP";
 			document.getElementById('shipposform').innerHTML = "x: " + tmp['x'] + " y: " + tmp['y'] + " team: " + tmp['team'] + " id: " + tmp['id'];
 			document.getElementById('shipposxform').value = tmp['x'];
 			document.getElementById('shipposyform').value = tmp['y'];

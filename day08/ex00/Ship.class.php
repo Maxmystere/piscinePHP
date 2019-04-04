@@ -10,6 +10,7 @@ class Ship
 	public $hp; // Points de vie
 	public $maxhp; // Points de vie
 	public $pp; // Puissance de moteur
+	public $maxpp; // Puissance de moteur
 	public $speed; // Vitesse
 	public $manu; // Manoeuvrabilite
 	public $shield; // Bouclier
@@ -35,6 +36,7 @@ class Ship
 		$this->hp = $kwargs['hp'];
 		$this->maxhp = $kwargs['hp'];
 		$this->pp = $kwargs['pp'];
+		$this->maxpp = $kwargs['pp'];
 		$this->speed = $kwargs['speed'];
 		$this->manu = $kwargs['manu'];
 		$this->team = $kwargs['team'];
@@ -50,9 +52,44 @@ class Ship
 		$tmp['length'] = $this->length;
 		return ($tmp);
 	}
-	function setShipSize()
+	function getRotation()
 	{
-		$this->pp = 42;
+		return ($this->rot);
+	}
+	function setRotation($newrot)
+	{
+		if ($newrot && $newrot < 5 && ($this->rot = $newrot + 1 || $this->rot = $newrot - 1))
+		{
+			$this->rot = $newrot;
+			if ($this->rot == 1)
+				$this->y--;
+			else if ($this->rot == 2)
+				$this->x++;
+			else if ($this->rot == 3)
+				$this->y++;
+			else if ($this->rot == 4)
+				$this->x--;
+		}
+	}
+	function moveForward($newpos)
+	{
+		if ($this->rot == 1)
+			$this->y -= $newpos;
+		else if ($this->rot == 2)
+			$this->x += $newpos;
+		else if ($this->rot == 3)
+			$this->y += $newpos;
+		else if ($this->rot == 4)
+			$this->x -= $newpos;
+	}
+	function useEnergy($needpp)
+	{
+		if ($needpp <= $this->pp)
+		{
+			$this->pp -= $needpp;
+			return (true);
+		}
+		return (false);
 	}
 	public static function doc()
 	{

@@ -16,7 +16,7 @@ if (!$tmp) {
 	<title>Warhammer 40K</title>
 </head>
 <body>
-	<canvas id="canvas" width="3000" height="2000"></canvas>
+	<canvas id="canvas" width="6000" height="4000"></canvas>
 
 	<script type="text/javascript">
 	var board = <?PHP $tmp->getJsonBoard(); ?>;
@@ -26,19 +26,24 @@ if (!$tmp) {
 		<h2 id="shipnameform">Login</h2>
 		<div id="shipposform" align="right">x: 42 y:21</div>
 		<div id="shiphpform">42 HP</div>
-		<div id="shipspeedform">42 km/h</div>
 		<div id="shippowerform">42 PP</div>
+		<div id="shipspeedform">42 km/h</div>
 		
 		<form action="/movement.php" class="form-container">
 			<input type='hidden' id='shipposxform' name='posx' value='0' />
 			<input type='hidden' id='shipposyform' name='posy' value='0' />
 			<input type='hidden' id='shipidform' name='id' value='-1' />
-			Moveforward : <select name='move'>
-			<?php for ($x = 0; $x <= 5; $x++) {echo "<option value='" . $x . "'>" . $x . "</option>";} ?>
-			</select>
-			<button type="submit" class="btn">Validate</button>
+			Moveforward : <input type='number' id='move' name='move' value='0' min="0" />
+			<button type="submit" class="btn">Ziouu</button>
 		</form>
-	
+		<button type="button" onclick="location.href='/movement.php?rotate=left&id='
+			+ document.getElementById('shipidform').value + '&posx='
+			+ document.getElementById('shipposxform').value + '&posy='
+			+ document.getElementById('shipposyform').value;">Rotate Left</button>
+		<button type="button" onclick="location.href='/movement.php?rotate=right&id='
+			+ document.getElementById('shipidform').value + '&posx='
+			+ document.getElementById('shipposxform').value + '&posy='
+			+ document.getElementById('shipposyform').value;">Rotate Right</button>
 	</div>
 </body>
 
