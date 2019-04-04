@@ -3,6 +3,7 @@ require_once 'Ship.class.php';
 require_once 'Player.class.php';
 class Board
 {
+	public $currentplayer;
 	public $player1;
 	public $player2;
 	public $x = 150;
@@ -10,32 +11,46 @@ class Board
 	protected $board;
 	function __construct()
 	{
+		$this->currentplayer = 0;
 		$this->board = array();
-		$this->player1 = new Player(array(1));
-		$this->player2 = new Player(array(1));
+		$this->player1 = new Player(array('id' => 0, 'boardclass' => $this));
+		$this->player2 = new Player(array('id' => 1, 'boardclass' => $this));
 
 		for ($ytmp = 0; $ytmp < $this->y; $ytmp++) {
 			for ($xtmp = 0; $xtmp < $this->x; $xtmp++) {
 				if ($xtmp == 4 && $ytmp == 20)
 				{
-					$this->board[$ytmp][$xtmp] = new Ship(array(
-						'name' => "Rightful Vengeance", 'width' => 1, 'length' => 2,
-						'imgid' => 1, 'hp' => 5, 'pp' => 4, 'team' => 1,
-						'speed' => 3, 'manu' => 2));
+					$this->board[$ytmp][$xtmp] = $this->player1->buildShip(array('name' => "Redful Vengeance", 'x' => $xtmp, 'y' => $ytmp));
+				}
+				else if ($xtmp == 9 && $ytmp == 10)
+				{
+					$this->board[$ytmp][$xtmp] = $this->player1->buildShip(array('name' => "Blueful Vengeance", 'x' => $xtmp, 'y' => $ytmp));
+				}
+				else if ($xtmp == 8 && $ytmp == 12)
+				{
+					$this->board[$ytmp][$xtmp] = $this->player1->buildShip(array('name' => "Kind Vengeance", 'x' => $xtmp, 'y' => $ytmp));
 				}
 				else if ($xtmp == 10 && $ytmp == 15)
 				{
-					$this->board[$ytmp][$xtmp] = new Ship(array(
-						'name' => "Smite Of Terra", 'width' => 2, 'length' => 6,
-						'imgid' => 2, 'hp' => 5, 'pp' => 5, 'team' => 1,
-						'speed' => 3, 'manu' => 2));
+					$this->board[$ytmp][$xtmp] = $this->player2->buildShip(array('name' => "Bad Vengeance", 'x' => $xtmp, 'y' => $ytmp));
 				}
 				else
 					$this->board[$ytmp][$xtmp] = 0;
 			}
 		}
 	}
-	
+	public function getCurrentPlayer()
+	{
+		if ($this->currentplayer == 0)
+			return ($this->player1);
+		return ($this->player2);
+	}
+	public function getPlayer($id)
+	{
+		if ($id == 0)
+			return ($this->player1);
+		return ($this->player2);
+	}
 	public function getShipAtLocation(array $kwargs)
 	{
 		if (array_key_exists('posx', $kwargs) && array_key_exists('posy', $kwargs))

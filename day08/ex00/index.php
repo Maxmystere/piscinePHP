@@ -32,6 +32,7 @@ if (!$tmp) {
 		<form action="/movement.php" class="form-container">
 			<input type='hidden' id='shipposxform' name='posx' value='0' />
 			<input type='hidden' id='shipposyform' name='posy' value='0' />
+			<input type='hidden' id='shipidform' name='id' value='-1' />
 			Moveforward : <select name='move'>
 			<?php for ($x = 0; $x <= 5; $x++) {echo "<option value='" . $x . "'>" . $x . "</option>";} ?>
 			</select>

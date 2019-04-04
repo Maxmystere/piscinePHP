@@ -2,6 +2,7 @@
 class Ship
 {
 	public $team; // Quel cote
+	public $id;
 	public $name; // Cool name
 	public $width; // Largeur du vaisseau
 	public $length; // Longueur du vaisseau
@@ -10,15 +11,19 @@ class Ship
 	public $maxhp; // Points de vie
 	public $pp; // Puissance de moteur
 	public $speed; // Vitesse
-	public $maneu; // Manoeuvrabilite
+	public $manu; // Manoeuvrabilite
 	public $shield; // Bouclier
 	public $wpns; // array d'armes
+	public $x;
+	public $y;
+	public $rot;
 
 	function __construct(array $kwargs)
 	{
 		if (!array_key_exists('name', $kwargs) || !array_key_exists('width', $kwargs) || !array_key_exists('length', $kwargs)
 		|| !array_key_exists('imgid', $kwargs) || !array_key_exists('hp', $kwargs) || !array_key_exists('pp', $kwargs) || !array_key_exists('team', $kwargs)
-		|| !array_key_exists('speed', $kwargs) || !array_key_exists('manu', $kwargs))
+		|| !array_key_exists('speed', $kwargs) || !array_key_exists('manu', $kwargs) || !array_key_exists('id', $kwargs)
+		|| !array_key_exists('x', $kwargs) || !array_key_exists('y', $kwargs))
 		{
 			print("Error missing arguments" . PHP_EOL);
 			return (0);
@@ -33,6 +38,10 @@ class Ship
 		$this->speed = $kwargs['speed'];
 		$this->manu = $kwargs['manu'];
 		$this->team = $kwargs['team'];
+		$this->id = $kwargs['id'];
+		$this->x = $kwargs['x'];
+		$this->y = $kwargs['y'];
+		$this->rot = ($this->team == 1 ? 3 : 1);
 		//$this->wpns = $kwargs['wpns'];
 	}
 	function getShipSize()
@@ -41,10 +50,9 @@ class Ship
 		$tmp['length'] = $this->length;
 		return ($tmp);
 	}
-	function move(array $kwargs)
+	function setShipSize()
 	{
-		print_r($this->board);
-		return ($this->board);
+		$this->pp = 42;
 	}
 	public static function doc()
 	{
