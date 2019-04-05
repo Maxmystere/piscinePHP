@@ -16,7 +16,7 @@ if (!$tmp) {
 	<title>Warhammer 40K</title>
 </head>
 <body>
-	<canvas id="canvas" width="6000" height="4000"></canvas>
+	<canvas id="canvas" width="3000" height="2000"></canvas>
 
 	<script type="text/javascript">
 		var board = <?PHP $tmp->getJsonBoard(); ?>;
@@ -46,13 +46,14 @@ if (!$tmp) {
 			+ document.getElementById('shipposyform').value;">Rotate Right</button>
 	</div>
 	<div class="stat-popup" id="myStats">
+	<button type="button" onclick="location.href='/install.php';">Restart</button>
 		<h2 id="currentplayerstat">Login-id</h2>
 		<div id="ppleftstat">data</div>
 	</div>
 	<script type="text/javascript">
 		var statstab = <?PHP $tmp->getCurrentStats(); ?>;
 
-		console.log(statstab);
+		//console.log(statstab);
 		document.getElementById('currentplayerstat').innerHTML = "player" + statstab['currentp'];
 		document.getElementById('ppleftstat').innerHTML = "PP left " + statstab['ppleft'];
 	</script>

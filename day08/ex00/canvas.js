@@ -72,11 +72,11 @@ window.onload = function () {
 						}
 					}*/
 					if (board[ytmp][xtmp]['rot'] == 2)
-						var boardx = (xtmp - 1) * (canvas.width / 150);
+						var boardx = (xtmp - board[ytmp][xtmp]['width'] + 1) * (canvas.width / 150);
 					else
 						var boardx = xtmp * (canvas.width / 150);
 					if (board[ytmp][xtmp]['rot'] == 3)
-						var boardy = (ytmp - 1) * (canvas.height / 100);
+						var boardy = (ytmp - board[ytmp][xtmp]['length'] + 1) * (canvas.height / 100);
 					else
 						var boardy = ytmp * (canvas.height / 100);
 				}

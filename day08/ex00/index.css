@@ -25,7 +25,7 @@ body {
 	display: block;
 	position: fixed;
 	top: 15px;
-	left: 15px;
+	right: 15px;
 	border: 3px solid gainsboro;
 	z-index: 9;
 	padding: 10px;

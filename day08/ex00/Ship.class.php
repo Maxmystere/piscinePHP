@@ -95,6 +95,10 @@ class Ship
 	{
 		return ($this->pp);
 	}
+	function refuelEnergy()
+	{
+		$this->pp = $this->maxpp;
+	}
 	public static function doc()
 	{
 		return (PHP_EOL . file_get_contents("Ship.doc.txt", true));
