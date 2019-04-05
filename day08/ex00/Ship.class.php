@@ -91,6 +91,10 @@ class Ship
 		}
 		return (false);
 	}
+	function getEnergy()
+	{
+		return ($this->pp);
+	}
 	public static function doc()
 	{
 		return (PHP_EOL . file_get_contents("Ship.doc.txt", true));

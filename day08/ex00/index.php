@@ -19,7 +19,7 @@ if (!$tmp) {
 	<canvas id="canvas" width="6000" height="4000"></canvas>
 
 	<script type="text/javascript">
-	var board = <?PHP $tmp->getJsonBoard(); ?>;
+		var board = <?PHP $tmp->getJsonBoard(); ?>;
 	</script>
 	<div class="form-popup" id="myForm">
 		<button type="submit" class="btn cancel" onclick="closeForm()">X</button>
@@ -45,6 +45,17 @@ if (!$tmp) {
 			+ document.getElementById('shipposxform').value + '&posy='
 			+ document.getElementById('shipposyform').value;">Rotate Right</button>
 	</div>
+	<div class="stat-popup" id="myStats">
+		<h2 id="currentplayerstat">Login-id</h2>
+		<div id="ppleftstat">data</div>
+	</div>
+	<script type="text/javascript">
+		var statstab = <?PHP $tmp->getCurrentStats(); ?>;
+
+		console.log(statstab);
+		document.getElementById('currentplayerstat').innerHTML = "player" + statstab['currentp'];
+		document.getElementById('ppleftstat').innerHTML = "PP left " + statstab['ppleft'];
+	</script>
 </body>
 
 </html>

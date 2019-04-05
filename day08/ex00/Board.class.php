@@ -49,6 +49,19 @@ class Board
 			return ($this->player1);
 		return ($this->player2);
 	}
+	public function getPPLeft()
+	{
+		if ($this->currentplayer == 0)
+			$pl =$this->player1;
+		else
+			$pl = $this->player2;
+		$ppleft = 0;
+		foreach($pl->getShipList() as $lilship)
+		{
+			$ppleft += $lilship->getEnergy();
+		}
+		return ($ppleft);
+	}
 	public function getPlayer($id)
 	{
 		if ($id == 0)
@@ -68,6 +81,12 @@ class Board
 	public function getJsonBoard()
 	{
 		echo json_encode($this->board);
+	}
+	public function getCurrentStats()
+	{
+		$tmp['currentp'] = $this->currentplayer;
+		$tmp['ppleft'] = $this->getPPLeft();
+		echo json_encode($tmp);
 	}
 	public static function doc()
 	{
