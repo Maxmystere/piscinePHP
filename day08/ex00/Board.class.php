@@ -31,8 +31,8 @@ class Board
 			}
 		}
 
-		$this->initFleet(array('team' => 0, 'player' => $this->player1, 'x' => 50, 'y' => 80));
-		$this->initFleet(array('team' => 1, 'player' => $this->player2, 'x' => 50, 'y' => 20));
+		$this->initFleet(array('team' => 0, 'player' => $this->player1, 'x' => 75, 'y' => 80));
+		$this->initFleet(array('team' => 1, 'player' => $this->player2, 'x' => 75, 'y' => 20));
 	}
 	private function initFleet(array $kwargs)
 	{

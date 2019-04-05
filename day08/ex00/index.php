@@ -16,7 +16,7 @@ if (!$tmp) {
 	<title>Warhammer 40K</title>
 </head>
 <body>
-	<canvas id="canvas" width="3000" height="2000"></canvas>
+	<canvas id="canvas" width="1740" height="1160"></canvas>
 
 	<script type="text/javascript">
 		var board = <?PHP $tmp->getJsonBoard(); ?>;
