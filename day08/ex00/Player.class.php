@@ -13,7 +13,7 @@ class Player
 	}
 	function buildShip(array $kwargs)
 	{
-		$tmp = new Cruiser(array(
+		$tmp = new Ship(array(
 			'name' => $kwargs['name'], 'width' => 1, 'length' => 2,
 			'imgid' => 1, 'hp' => 5, 'pp' => 4, 'team' => $this->id,
 			'speed' => 3, 'manu' => 2, 'id' => sizeof($this->shipsarray), 'x' => $kwargs['x'], 'y' => $kwargs['y']

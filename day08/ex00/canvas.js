@@ -72,7 +72,7 @@ window.onload = function () {
 						}
 					}*/
 					if (board[ytmp][xtmp]['rot'] == 2)
-						var boardx = (xtmp - board[ytmp][xtmp]['width'] + 1) * (canvas.width / 150);
+						var boardx = (xtmp - board[ytmp][xtmp]['length'] + 1) * (canvas.width / 150);
 					else
 						var boardx = xtmp * (canvas.width / 150);
 					if (board[ytmp][xtmp]['rot'] == 3)
