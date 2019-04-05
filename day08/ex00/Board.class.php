@@ -1,7 +1,9 @@
 <?php
 require_once 'Ship.class.php';
 require_once 'Player.class.php';
+require_once 'Fighter.class.php';
 require_once 'Cruiser.class.php';
+require_once 'Flagship.class.php';
 class Board
 {
 	public static $verbose;
@@ -25,29 +27,57 @@ class Board
 	{
 		for ($ytmp = 0; $ytmp < $this->y; $ytmp++) {
 			for ($xtmp = 0; $xtmp < $this->x; $xtmp++) {
-				if ($xtmp == 12 && $ytmp == 2) {
-					$this->board[$ytmp][$xtmp] = $this->player2->buildShip(array('name' => "Redful Vengeance", 'x' => $xtmp, 'y' => $ytmp));
-				} else if ($xtmp == 16 && $ytmp == 2) {
-					$this->board[$ytmp][$xtmp] = $this->player2->buildShip(array('name' => "Blueful Vengeance", 'x' => $xtmp, 'y' => $ytmp));
-				} else if ($xtmp == 20 && $ytmp == 2) {
-					$this->board[$ytmp][$xtmp] = $this->player2->buildShip(array('name' => "Kind Vengeance", 'x' => $xtmp, 'y' => $ytmp));
-				} else if ($xtmp == 12 && $ytmp == 10) {
-					$this->board[$ytmp][$xtmp] = $this->player1->buildShip(array('name' => "Bad Vengeance", 'x' => $xtmp, 'y' => $ytmp));
-				} else if ($xtmp == 16 && $ytmp == 10) {
-					$this->board[$ytmp][$xtmp] = $this->player1->buildShip(array('name' => "Bad Vengeance", 'x' => $xtmp, 'y' => $ytmp));
-				} else if ($xtmp == 20 && $ytmp == 10) {
-					$this->board[$ytmp][$xtmp] = $this->player1->buildShip(array('name' => "Bad Vengeance", 'x' => $xtmp, 'y' => $ytmp));
-				} else if ($xtmp == 20 && $ytmp == 10) {
-					$this->board[$ytmp][$xtmp] = $this->player1->buildShip(array('name' => "Bad Vengeance", 'x' => $xtmp, 'y' => $ytmp));
-				} else
-					$this->board[$ytmp][$xtmp] = 0;
+				$this->board[$ytmp][$xtmp] = 0;
 			}
 		}
+
+		$this->initFleet(array('team' => 0, 'player' => $this->player1, 'x' => 50, 'y' => 80));
+		$this->initFleet(array('team' => 1, 'player' => $this->player2, 'x' => 50, 'y' => 20));
 	}
-	function buildShipatLocation(array $kwargs)
+	private function initFleet(array $kwargs)
+	{
+		$player = $kwargs['player'];
+		$ylne = $kwargs['y']; //Position on board
+		$xctr = $kwargs['x']; //center of fleet
+		$team = $kwargs['team'];
+
+		$ship = $this->buildShipatLocation(array('team' => $team, 'x' => $xctr - 22, 'y' => $ylne - 2, 'shipclass' => 'Fighter', 'name' => 'Reaper'));
+		$player->addShip($ship);
+		$ship = $this->buildShipatLocation(array('team' => $team, 'x' => $xctr - 20, 'y' => $ylne - 1, 'shipclass' => 'Fighter', 'name' => 'Inquisitor'));
+		$player->addShip($ship);
+		$ship = $this->buildShipatLocation(array('team' => $team, 'x' => $xctr - 18, 'y' => $ylne, 'shipclass' => 'Fighter', 'name' => 'Inquisitor'));
+		$player->addShip($ship);
+		$ship = $this->buildShipatLocation(array('team' => $team, 'x' => $xctr - 16, 'y' => $ylne + 1, 'shipclass' => 'Cruiser', 'name' => 'Bulwark'));
+		$player->addShip($ship);
+		$ship = $this->buildShipatLocation(array('team' => $team, 'x' => $xctr - 10 - $team, 'y' => $ylne, 'shipclass' => 'Flagship', 'name' => 'Doom Bringer'));
+		$player->addShip($ship);
+		$ship = $this->buildShipatLocation(array('team' => $team, 'x' => $xctr - 5 - $team, 'y' => $ylne, 'shipclass' => 'Cruiser', 'name' => 'High Templar'));
+		$player->addShip($ship);
+		$ship = $this->buildShipatLocation(array('team' => $team, 'x' => $xctr - 1, 'y' => $ylne, 'shipclass' => 'Flagship', 'name' => 'Emperor\'s Might'));
+		$player->addShip($ship);
+		$ship = $this->buildShipatLocation(array('team' => $team, 'x' => $xctr + 5, 'y' => $ylne, 'shipclass' => 'Cruiser', 'name' => 'High Templar'));
+		$player->addShip($ship);
+		$ship = $this->buildShipatLocation(array('team' => $team, 'x' => $xctr + 9, 'y' => $ylne, 'shipclass' => 'Flagship', 'name' => 'Doom Bringer'));
+		$player->addShip($ship);
+		$ship = $this->buildShipatLocation(array('team' => $team, 'x' => $xctr + 15, 'y' => $ylne + 1, 'shipclass' => 'Cruiser', 'name' => 'Bulwark'));
+		$player->addShip($ship);
+		$ship = $this->buildShipatLocation(array('team' => $team, 'x' => $xctr + 18, 'y' => $ylne, 'shipclass' => 'Fighter', 'name' => 'Inquisitor'));
+		$player->addShip($ship);
+		$ship = $this->buildShipatLocation(array('team' => $team, 'x' => $xctr + 20, 'y' => $ylne - 1, 'shipclass' => 'Fighter', 'name' => 'Inquisitor'));
+		$player->addShip($ship);
+		$ship = $this->buildShipatLocation(array('team' => $team, 'x' => $xctr + 22, 'y' => $ylne - 2, 'shipclass' => 'Fighter', 'name' => 'Reaper'));
+		$player->addShip($ship);
+	}
+	private function buildShipatLocation(array $kwargs)
 	{
 		$x = $kwargs['x'];
 		$y = $kwargs['y'];
+		$classname = $kwargs['shipclass'];
+		$shipname = $kwargs['name'];
+		$team = $kwargs['team'];
+		$newship = new $classname(array('team' => $team, 'name' => $shipname, 'x' => $x, 'y' => $y));
+		$this->board[$y][$x] = $newship;
+		return ($newship);
 	}
 	public function changePlayer()
 	{

@@ -11,20 +11,10 @@ class Player
 		$this->id = $kwargs['id'];
 		$this->boardclass = $kwargs['boardclass'];
 	}
-	function buildShip(array $kwargs)
+	function addShip($newship)
 	{
-		$tmp = new Ship(array(
-			'name' => $kwargs['name'], 'width' => 1, 'length' => 2,
-			'imgid' => 1, 'hp' => 5, 'pp' => 4, 'team' => $this->id,
-			'speed' => 3, 'manu' => 2, 'id' => sizeof($this->shipsarray), 'x' => $kwargs['x'], 'y' => $kwargs['y']
-		));
-		$this->shipsarray[] = $tmp;
-		return ($tmp);
-	}
-	function addShip(Ship $newship)
-	{
-		$newship['id'] = sizeof($this->shipsarray);
-		$newship['team'] = $this->id;
+		$newship->setID(sizeof($this->shipsarray));
+		$newship->setTeam($this->id);
 		$this->shipsarray[] = $newship;
 	}
 	function move(array $kwargs)
@@ -62,23 +52,24 @@ class Player
 		$rot = $this->shipsarray[$kwargs['id']]->getrotation();
 		$x = $kwargs['posx'];
 		$y = $kwargs['posy'];
+		$tmpship = $this->boardclass->board[$y][$x];
 		if ($rot == 1) {
-			$tmpship = $this->boardclass->board[$y][$x];
+			
 			$tmpship->setRotation(4);
 			$this->boardclass->board[$y][$x] = 0;
 			$this->boardclass->board[$y][$x - 1] = $tmpship;
 		} else if ($rot == 4) {
-			$tmpship = $this->boardclass->board[$y][$x];
+			//$tmpship = $this->boardclass->board[$y][$x];
 			$tmpship->setRotation(3);
 			$this->boardclass->board[$y][$x] = 0;
 			$this->boardclass->board[$y + 1][$x] = $tmpship;
 		} else if ($rot == 3) {
-			$tmpship = $this->boardclass->board[$y][$x];
+			//$tmpship = $this->boardclass->board[$y][$x];
 			$tmpship->setRotation(2);
 			$this->boardclass->board[$y][$x] = 0;
 			$this->boardclass->board[$y][$x + 1] = $tmpship;
 		} else if ($rot == 2) {
-			$tmpship = $this->boardclass->board[$y][$x];
+			//$tmpship = $this->boardclass->board[$y][$x];
 			$tmpship->setRotation(1);
 			$this->boardclass->board[$y][$x] = 0;
 			$this->boardclass->board[$y - 1][$x] = $tmpship;

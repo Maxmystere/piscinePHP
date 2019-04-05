@@ -100,6 +100,14 @@ class Ship implements IShip
 	{
 		$this->pp = $this->maxpp;
 	}
+	function setID($id)
+	{
+		$this->id = $id;
+	}
+	function setteam($team)
+	{
+		$this->team = $team;
+	}
 	public static function doc()
 	{
 		return (PHP_EOL . file_get_contents("Ship.doc.txt", true));

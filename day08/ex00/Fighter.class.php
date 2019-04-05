@@ -1,16 +1,16 @@
 <?php
 require_once 'Ship.class.php';
-class Cruiser extends Ship
+class Fighter extends Ship
 {
 	function __construct(array $kwargs)
 	{
 		$this->name = $kwargs['name'];
-		$this->width = 2;
-		$this->length = 6;
-		$this->imgid = 2;
-		$this->maxhp = 10;
+		$this->width = 1;
+		$this->length = 2;
+		$this->imgid = 1;
+		$this->maxhp = 5;
 		$this->hp = $this->maxhp;
-		$this->maxpp = 5;
+		$this->maxpp = 6;
 		$this->pp = $this->maxpp;
 		$this->speed = 2;
 		$this->manu = 3;
