@@ -1,5 +1,6 @@
 <?php
-class Ship
+require_once 'IShip.class.php';
+class Ship implements IShip
 {
 	public $team; // Quel cote
 	public $id;
@@ -71,16 +72,16 @@ class Ship
 				$this->x--;
 		}
 	}
-	function moveForward($newpos)
+	function moveForward($trust)
 	{
 		if ($this->rot == 1)
-			$this->y -= $newpos;
+			$this->y -= $trust;
 		else if ($this->rot == 2)
-			$this->x += $newpos;
+			$this->x += $trust;
 		else if ($this->rot == 3)
-			$this->y += $newpos;
+			$this->y += $trust;
 		else if ($this->rot == 4)
-			$this->x -= $newpos;
+			$this->x -= $trust;
 	}
 	function useEnergy($needpp)
 	{

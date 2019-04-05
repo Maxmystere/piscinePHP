@@ -1,32 +1,32 @@
-function drawSmallShip(canvas, ctx, image, x, y, rot) {
+function drawSmallShip(canvas, ctx, image, x, y, rot, witdh, length) {
 	if (rot == 1)
-		ctx.drawImage(image, 39, 271, 53, 141, x, y, canvas.width / 150 * 1, canvas.height / 100 * 2);
+		ctx.drawImage(image, 39, 271, 53, 141, x, y, canvas.width / 150 * witdh, canvas.height / 100 * length);
 	else if (rot == 2)
-		ctx.drawImage(image, 168, 340, 141, 53, x, y, canvas.width / 150 * 2, canvas.height / 100 * 1);
+		ctx.drawImage(image, 168, 340, 141, 53, x, y, canvas.width / 150 * length, canvas.height / 100 * witdh);
 	else if (rot == 3)
-		ctx.drawImage(image, 309, 340, 53, 141, x, y, canvas.width / 150 * 1, canvas.height / 100 * 2);
+		ctx.drawImage(image, 309, 340, 53, 141, x, y, canvas.width / 150 * witdh, canvas.height / 100 * length);
 	else if (rot == 4)
-		ctx.drawImage(image, 168, 393, 141, 53, x, y, canvas.width / 150 * 2, canvas.height / 100 * 1);
+		ctx.drawImage(image, 168, 393, 141, 53, x, y, canvas.width / 150 * length, canvas.height / 100 * witdh);
 }
-function drawMediumShip(canvas, ctx, image, x, y, rot) {
+function drawMediumShip(canvas, ctx, image, x, y, rot, witdh, length) {
 	if (rot == 1)
-		ctx.drawImage(image, 92, 188, 76, 196, x, y, canvas.width / 150 * 2, canvas.height / 100 * 6);
+		ctx.drawImage(image, 92, 188, 76, 196, x, y, canvas.width / 150 * witdh, canvas.height / 100 * length);
 	else if (rot == 2)
-		ctx.drawImage(image, 168, 188, 196, 76, x, y, canvas.width / 150 * 6, canvas.height / 100 * 2);
+		ctx.drawImage(image, 168, 188, 196, 76, x, y, canvas.width / 150 * length, canvas.height / 100 * witdh);
 	else if (rot == 3)
-		ctx.drawImage(image, 364, 271, 76, 196, x, y, canvas.width / 150 * 2, canvas.height / 100 * 6);
+		ctx.drawImage(image, 364, 271, 76, 196, x, y, canvas.width / 150 * witdh, canvas.height / 100 * length);
 	else if (rot == 4)
-		ctx.drawImage(image, 168, 264, 196, 76, x, y, canvas.width / 150 * 6, canvas.height / 100 * 2);
+		ctx.drawImage(image, 168, 264, 196, 76, x, y, canvas.width / 150 * length, canvas.height / 100 * witdh);
 }
-function drawBigShip(canvas, ctx, image, x, y, rot) {
+function drawBigShip(canvas, ctx, image, x, y, rot, witdh, length) {
 	if (rot == 1)
-		ctx.drawImage(image, 0, 0, 92, 271, x, y, canvas.width / 150 * 3, canvas.height / 100 * 10);
+		ctx.drawImage(image, 0, 0, 92, 271, x, y, canvas.width / 150 * witdh, canvas.height / 100 * length);
 	else if (rot == 2)
-		ctx.drawImage(image, 92, 0, 272, 93, x, y, canvas.width / 150 * 10, canvas.height / 100 * 3);
+		ctx.drawImage(image, 92, 0, 272, 93, x, y, canvas.width / 150 * length, canvas.height / 100 * witdh);
 	else if (rot == 3)
-		ctx.drawImage(image, 364, 0, 93, 271, x, y, canvas.width / 150 * 3, canvas.height / 100 * 10);
+		ctx.drawImage(image, 364, 0, 93, 271, x, y, canvas.width / 150 * witdh, canvas.height / 100 * length);
 	else if (rot == 4)
-		ctx.drawImage(image, 92, 93, 272, 95, x, y, canvas.width / 150 * 10, canvas.height / 100 * 3);
+		ctx.drawImage(image, 92, 93, 272, 95, x, y, canvas.width / 150 * length, canvas.height / 100 * witdh);
 }
 
 var image = new Image();
@@ -85,21 +85,27 @@ window.onload = function () {
 						(board[ytmp][xtmp]['team'] == 1 ? image : image2),
 						boardx,
 						boardy,
-						board[ytmp][xtmp]['rot']);
+						board[ytmp][xtmp]['rot'],
+						board[ytmp][xtmp]['width'],
+						board[ytmp][xtmp]['length']);
 				}
 				else if (board[ytmp][xtmp]['imgid'] == 2) {
 					drawMediumShip(canvas, ctx,
 						(board[ytmp][xtmp]['team'] == 1 ? image : image2),
 						boardx,
 						boardy,
-						board[ytmp][xtmp]['rot']);
+						board[ytmp][xtmp]['rot'],
+						board[ytmp][xtmp]['width'],
+						board[ytmp][xtmp]['length']);
 				}
 				else if (board[ytmp][xtmp]['imgid'] == 3) {
 					drawBigShip(canvas, ctx,
 						(board[ytmp][xtmp]['team'] == 1 ? image : image2),
 						boardx,
 						boardy,
-						board[ytmp][xtmp]['rot']);
+						board[ytmp][xtmp]['rot'],
+						board[ytmp][xtmp]['width'],
+						board[ytmp][xtmp]['length']);
 				}
 			}
 		}
@@ -112,7 +118,7 @@ window.onload = function () {
 		var cury = y / (canvas.width / 150);
 		console.log(board[cury][curx]);
 		//drawSmallShip(canvas, ctx, image, x, y, 4);
-		//console.log("Click x : " + curx + " y : " + cury);
+		console.log("Click x : " + curx + " y : " + cury);
 		if (board[cury][curx]) {
 			var tmp = board[cury][curx];
 			document.getElementById("myForm").style.display = "block";

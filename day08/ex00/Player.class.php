@@ -21,6 +21,12 @@ class Player
 		$this->shipsarray[] = $tmp;
 		return ($tmp);
 	}
+	function addShip(Ship $newship)
+	{
+		$newship['id'] = sizeof($this->shipsarray);
+		$newship['team'] = $this->id;
+		$this->shipsarray[] = $newship;
+	}
 	function move(array $kwargs)
 	{
 		if (!$this->shipsarray[$kwargs['id']]->useEnergy($kwargs['move'])) {
