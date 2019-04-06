@@ -1,0 +1,40 @@
+<html>
+<header>
+	<title>Balloon</title>
+</header>
+
+<body>
+	<div id='balloon' style="height:200px;width:200px;background-color:red;border-radius: 100px;" onclick="grow()"
+	 onmouseout="shrink()"></div>
+	<script>
+		function shrink() {
+			if (document.getElementById('balloon').clientHeight > 200) {
+				document.getElementById('balloon').style.width = document.getElementById('balloon').clientWidth - 5 + "px";
+				document.getElementById('balloon').style.height = document.getElementById('balloon').clientHeight - 5 + "px";
+				if (document.getElementById('balloon').style.backgroundColor == 'red')
+					document.getElementById('balloon').style.backgroundColor = 'blue';
+				else if (document.getElementById('balloon').style.backgroundColor == 'blue')
+					document.getElementById('balloon').style.backgroundColor = 'green';
+				else
+					document.getElementById('balloon').style.backgroundColor = 'red';
+			}
+		}
+		function grow() {
+			document.getElementById('balloon').style.width = document.getElementById('balloon').clientWidth + 10 + "px";
+			document.getElementById('balloon').style.height = document.getElementById('balloon').clientHeight + 10 + "px";
+			if (document.getElementById('balloon').clientHeight > 420) {
+				document.getElementById('balloon').style.width = "200px";
+				document.getElementById('balloon').style.height = "200px";
+			}
+			document.getElementById('balloon').style.borderRadius = document.getElementById('balloon').clientHeight / 2 + "px";
+			if (document.getElementById('balloon').style.backgroundColor == 'red')
+				document.getElementById('balloon').style.backgroundColor = 'green';
+			else if (document.getElementById('balloon').style.backgroundColor == 'green')
+				document.getElementById('balloon').style.backgroundColor = 'blue';
+			else
+				document.getElementById('balloon').style.backgroundColor = 'red';
+		}
+	</script>
+</body>
+
+</html>
