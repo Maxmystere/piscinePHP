@@ -63,13 +63,13 @@ class Ship implements IShip
 		{
 			$this->rot = $newrot;
 			if ($this->rot == 1)
-				$this->y--;
+				$this->y -= $this->length / 2;
 			else if ($this->rot == 2)
-				$this->x++;
+				$this->x += $this->length / 2;
 			else if ($this->rot == 3)
-				$this->y++;
+				$this->y += $this->length / 2;
 			else if ($this->rot == 4)
-				$this->x--;
+				$this->x -= $this->length / 2;
 		}
 	}
 	function moveForward($trust)

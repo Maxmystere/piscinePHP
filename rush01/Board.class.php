@@ -82,31 +82,29 @@ class Board
 		if ($shiprot == 1) {
 			for ($ytmp = $y; $ytmp < $y + $shipsize['l']; $ytmp++) {
 				for ($xtmp = $x; $xtmp < $x + $shipsize['w']; $xtmp++) {
-					if ($x != $xtmp || $y != $ytmp) {
+					if ($x != $xtmp || $y != $ytmp)
 						$this->board[$ytmp][$xtmp] = array('x' => $x, 'y' => $y);
-					}
 				}
 			}
 		} else if ($shiprot == 2) {
 			for ($ytmp = $y; $ytmp < $y + $shipsize['w']; $ytmp++) {
 				for ($xtmp = $x; $xtmp > $x - $shipsize['l']; $xtmp--) {
+					if ($x != $xtmp || $y != $ytmp)
 						$this->board[$ytmp][$xtmp] = array('x' => $x, 'y' => $y);
 				}
 			}
 		} else if ($shiprot == 3) {
 			for ($ytmp = $y; $ytmp > $y - $shipsize['l']; $ytmp--) {
 				for ($xtmp = $x; $xtmp > $x - $shipsize['w']; $xtmp--) {
-					if ($x != $xtmp || $y != $ytmp) {
+					if ($x != $xtmp || $y != $ytmp)
 						$this->board[$ytmp][$xtmp] = array('x' => $x, 'y' => $y);
-					}
 				}
 			}
 		} else if ($shiprot == 4) {
 			for ($ytmp = $y; $ytmp > $y - $shipsize['w']; $ytmp--) {
 				for ($xtmp = $x; $xtmp < $x + $shipsize['l']; $xtmp++) {
-					if ($x != $xtmp || $y != $ytmp) {
+					if ($x != $xtmp || $y != $ytmp)
 						$this->board[$ytmp][$xtmp] = array('x' => $x, 'y' => $y);
-					}
 				}
 			}
 		}

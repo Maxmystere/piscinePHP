@@ -36,15 +36,27 @@ class Player
 			$this->boardclass->board[$y - $kwargs['move']][$x] = $tmpship;
 		} else if ($rot == 2) {
 			$tmpship = $this->boardclass->board[$y][$x];
-			$this->boardclass->board[$y][$x] = 0;
+			for ($ytmp = $y; $ytmp < $y + $shipsize['w']; $ytmp++) {
+				for ($xtmp = $x; $xtmp > $x - $shipsize['l']; $xtmp--) {
+					$this->boardclass->board[$ytmp][$xtmp] = 0;
+				}
+			}
 			$this->boardclass->board[$y][$x + $kwargs['move']] = $tmpship;
 		} else if ($rot == 3) {
 			$tmpship = $this->boardclass->board[$y][$x];
-			$this->boardclass->board[$y][$x] = 0;
+			for ($ytmp = $y; $ytmp > $y - $shipsize['l']; $ytmp--) {
+				for ($xtmp = $x; $xtmp > $x - $shipsize['w']; $xtmp--) {
+					$this->boardclass->board[$ytmp][$xtmp] = 0;
+				}
+			}
 			$this->boardclass->board[$y + $kwargs['move']][$x] = $tmpship;
 		} else if ($rot == 4) {
 			$tmpship = $this->boardclass->board[$y][$x];
-			$this->boardclass->board[$y][$x] = 0;
+			for ($ytmp = $y; $ytmp > $y - $shipsize['w']; $ytmp--) {
+				for ($xtmp = $x; $xtmp < $x + $shipsize['l']; $xtmp++) {
+					$this->boardclass->board[$ytmp][$xtmp] = 0;
+				}
+			}
 			$this->boardclass->board[$y][$x - $kwargs['move']] = $tmpship;
 		}
 		$tmpship->moveForward($kwargs['move']);
@@ -55,29 +67,43 @@ class Player
 			return ("needEnergy");
 		}
 		$rot = $this->shipsarray[$kwargs['id']]->getrotation();
+		$shipsize = $this->shipsarray[$kwargs['id']]->getSize();
+		$shiplen = $shipsize['l'] / 2;
 		$x = $kwargs['posx'];
 		$y = $kwargs['posy'];
 		$tmpship = $this->boardclass->board[$y][$x];
 		if ($rot == 1) {
-
 			$tmpship->setRotation(4);
-			$this->boardclass->board[$y][$x] = 0;
-			$this->boardclass->board[$y][$x - 1] = $tmpship;
-		} else if ($rot == 4) {
-			//$tmpship = $this->boardclass->board[$y][$x];
-			$tmpship->setRotation(3);
-			$this->boardclass->board[$y][$x] = 0;
-			$this->boardclass->board[$y + 1][$x] = $tmpship;
-		} else if ($rot == 3) {
-			//$tmpship = $this->boardclass->board[$y][$x];
-			$tmpship->setRotation(2);
-			$this->boardclass->board[$y][$x] = 0;
-			$this->boardclass->board[$y][$x + 1] = $tmpship;
+			for ($ytmp = $y; $ytmp < $y + $shipsize['l']; $ytmp++) {
+				for ($xtmp = $x; $xtmp < $x + $shipsize['w']; $xtmp++) {
+					$this->boardclass->board[$ytmp][$xtmp] = 0;
+				}
+			}
+			$this->boardclass->board[$y][$x - $shiplen] = $tmpship;
 		} else if ($rot == 2) {
-			//$tmpship = $this->boardclass->board[$y][$x];
 			$tmpship->setRotation(1);
-			$this->boardclass->board[$y][$x] = 0;
-			$this->boardclass->board[$y - 1][$x] = $tmpship;
+			for ($ytmp = $y; $ytmp < $y + $shipsize['w']; $ytmp++) {
+				for ($xtmp = $x; $xtmp > $x - $shipsize['l']; $xtmp--) {
+					$this->boardclass->board[$ytmp][$xtmp] = 0;
+				}
+			}
+			$this->boardclass->board[$y - $shiplen][$x] = $tmpship;
+		} else if ($rot == 3) {
+			$tmpship->setRotation(2);
+			for ($ytmp = $y; $ytmp > $y - $shipsize['l']; $ytmp--) {
+				for ($xtmp = $x; $xtmp > $x - $shipsize['w']; $xtmp--) {
+					$this->boardclass->board[$ytmp][$xtmp] = 0;
+				}
+			}
+			$this->boardclass->board[$y][$x + $shiplen] = $tmpship;
+		} else if ($rot == 4) {
+			$tmpship->setRotation(3);
+			for ($ytmp = $y; $ytmp > $y - $shipsize['w']; $ytmp--) {
+				for ($xtmp = $x; $xtmp < $x + $shipsize['l']; $xtmp++) {
+					$this->boardclass->board[$ytmp][$xtmp] = 0;
+				}
+			}
+			$this->boardclass->board[$y + $shiplen][$x] = $tmpship;
 		}
 	}
 	function rotateRight(array $kwargs)
@@ -86,28 +112,46 @@ class Player
 			return ("needEnergy");
 		}
 		$rot = $this->shipsarray[$kwargs['id']]->getrotation();
+		$shipsize = $this->shipsarray[$kwargs['id']]->getSize();
+		$shiplen = $shipsize['l'] / 2;
 		$x = $kwargs['posx'];
 		$y = $kwargs['posy'];
 		if ($rot == 1) {
 			$tmpship = $this->boardclass->board[$y][$x];
 			$tmpship->setRotation(2);
-			$this->boardclass->board[$y][$x] = 0;
-			$this->boardclass->board[$y][$x + 1] = $tmpship;
+			for ($ytmp = $y; $ytmp < $y + $shipsize['l']; $ytmp++) {
+				for ($xtmp = $x; $xtmp < $x + $shipsize['w']; $xtmp++) {
+					$this->boardclass->board[$ytmp][$xtmp] = 0;
+				}
+			}
+			$this->boardclass->board[$y][$x + $shiplen] = $tmpship;
 		} else if ($rot == 2) {
 			$tmpship = $this->boardclass->board[$y][$x];
 			$tmpship->setRotation(3);
-			$this->boardclass->board[$y][$x] = 0;
-			$this->boardclass->board[$y + 1][$x] = $tmpship;
+			for ($ytmp = $y; $ytmp < $y + $shipsize['w']; $ytmp++) {
+				for ($xtmp = $x; $xtmp > $x - $shipsize['l']; $xtmp--) {
+					$this->boardclass->board[$ytmp][$xtmp] = 0;
+				}
+			}
+			$this->boardclass->board[$y + $shiplen][$x] = $tmpship;
 		} else if ($rot == 3) {
 			$tmpship = $this->boardclass->board[$y][$x];
 			$tmpship->setRotation(4);
-			$this->boardclass->board[$y][$x] = 0;
-			$this->boardclass->board[$y][$x - 1] = $tmpship;
+			for ($ytmp = $y; $ytmp > $y - $shipsize['l']; $ytmp--) {
+				for ($xtmp = $x; $xtmp > $x - $shipsize['w']; $xtmp--) {
+					$this->boardclass->board[$ytmp][$xtmp] = 0;
+				}
+			}
+			$this->boardclass->board[$y][$x - $shiplen] = $tmpship;
 		} else if ($rot == 4) {
 			$tmpship = $this->boardclass->board[$y][$x];
 			$tmpship->setRotation(1);
-			$this->boardclass->board[$y][$x] = 0;
-			$this->boardclass->board[$y - 1][$x] = $tmpship;
+			for ($ytmp = $y; $ytmp > $y - $shipsize['w']; $ytmp--) {
+				for ($xtmp = $x; $xtmp < $x + $shipsize['l']; $xtmp++) {
+					$this->boardclass->board[$ytmp][$xtmp] = 0;
+				}
+			}
+			$this->boardclass->board[$y - $shiplen][$x] = $tmpship;
 		}
 	}
 	function getShipList()
