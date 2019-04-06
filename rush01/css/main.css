@@ -1,0 +1,48 @@
+body {
+	margin: auto;
+	background-color: antiquewhite;
+	font-family: 'Courier New', Courier, monospace;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+  }
+
+
+li {
+    float: right;
+    border-right: 1px solid #bbb;
+    height: 70px;
+}
+
+li:last-child {
+  border-right: none;
+}
+
+li.logo {
+    float: left;
+    padding:0;
+} 
+
+li a img {
+    height: 40px;
+    padding:0;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 26px 18px;
+    text-decoration: none;
+}
+  
+li a:hover {
+    background-color: #0674b6;
+    color: white;
+}
+

@@ -6,6 +6,7 @@ td {
 body {
 	margin: 0px;
 	background-color: rgb(35, 35, 38);
+	font-family: 'Courier New', Courier, monospace;
 }
 
 /* The popup form - hidden by default */
