@@ -10,8 +10,8 @@ class Board
 	public $currentplayer;
 	public $player1;
 	public $player2;
-	public $x = 20;
-	public $y = 20;
+	public $x = 150;
+	public $y = 100;
 	public $board;
 	function __construct()
 	{
