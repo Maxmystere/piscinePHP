@@ -1,4 +1,4 @@
-<?php include "auth.php";
+<?php
 session_start();
 if (isset($_SESSION['loggued_on_user'])) {
     echo '<iframe id="msg" name="msg" title="42BattlenetChat"  height="300px" src="chat.php"></iframe><br>';
