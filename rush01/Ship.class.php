@@ -47,10 +47,10 @@ class Ship implements IShip
 		$this->rot = ($this->team == 1 ? 3 : 1);
 		//$this->wpns = $kwargs['wpns'];
 	}
-	function getShipSize()
+	function getSize()
 	{
-		$tmp['width'] = $this->width;
-		$tmp['length'] = $this->length;
+		$tmp['w'] = $this->width;
+		$tmp['l'] = $this->length;
 		return ($tmp);
 	}
 	function getRotation()

@@ -8,7 +8,6 @@ if (!$tmp) {
 ?>
 <html>
 <head>
-	
 	<html lang="en">
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="index.css" />
@@ -16,7 +15,7 @@ if (!$tmp) {
 	<title>Warhammer 40K</title>
 </head>
 <body>
-	<canvas id="canvas" width="1740" height="1160"></canvas>
+	<canvas id="canvas" width="500" height="500"></canvas>
 
 	<script type="text/javascript">
 		var board = <?PHP $tmp->getJsonBoard(); ?>;

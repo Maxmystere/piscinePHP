@@ -23,11 +23,16 @@ class Player
 			return ("needEnergy");
 		}
 		$rot = $this->shipsarray[$kwargs['id']]->getrotation();
+		$shipsize = $this->shipsarray[$kwargs['id']]->getSize();
 		$x = $kwargs['posx'];
 		$y = $kwargs['posy'];
 		if ($rot == 1) {
 			$tmpship = $this->boardclass->board[$y][$x];
-			$this->boardclass->board[$y][$x] = 0;
+			for ($ytmp = $y; $ytmp < $y + $shipsize['l']; $ytmp++) {
+				for ($xtmp = $x; $xtmp < $x + $shipsize['w']; $xtmp++) {
+					$this->boardclass->board[$ytmp][$xtmp] = 0;
+				}
+			}
 			$this->boardclass->board[$y - $kwargs['move']][$x] = $tmpship;
 		} else if ($rot == 2) {
 			$tmpship = $this->boardclass->board[$y][$x];
@@ -54,7 +59,7 @@ class Player
 		$y = $kwargs['posy'];
 		$tmpship = $this->boardclass->board[$y][$x];
 		if ($rot == 1) {
-			
+
 			$tmpship->setRotation(4);
 			$this->boardclass->board[$y][$x] = 0;
 			$this->boardclass->board[$y][$x - 1] = $tmpship;
