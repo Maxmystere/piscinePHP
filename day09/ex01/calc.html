@@ -1,0 +1,59 @@
+<html>
+<header>
+	<title>9000</title>
+</header>
+
+<body>
+	<input type="text" id="text1">
+	<select id="op">
+		<option value="add">+</option>
+		<option value="sub">-</option>
+		<option value="mul">*</option>
+		<option value="div">/</option>
+		<option value="mod">%</option>
+	</select>
+	<input type="text" id="text2">
+	<input type="submit" id="submitbtn" onclick="calc()">
+	<script>
+		function calc() {
+			var x = document.getElementById('text1').value;
+			var y = document.getElementById('text2').value;
+			var op = document.getElementById('op').value;
+			var res = 0;
+
+			if (isNaN(x) || isNaN(y) || x < 0 || y < 0)
+				alert('Error :(');
+			else {
+				if (op == "add") {
+					res = parseInt(x) + parseInt(y);
+				}
+				else if (op == "sub") {
+					res = parseInt(x) - parseInt(y);
+				}
+				else if (op == "mul") {
+					res = parseInt(x) * parseInt(y);
+				}
+				else if (op == "div") {
+					if (parseInt(y) == 0) {
+						res = "It's over 9000!";
+					}
+					else
+						res = parseInt(x) / parseInt(y);
+				}
+				else if (op == "mod") {
+					if (parseInt(y) == 0) {
+						res = "It's over 9000!";
+					}
+					else
+						res = parseInt(x) % parseInt(y);
+				}
+
+				console.log(res);
+				alert(res);
+			}
+		}
+		window.setInterval(function () { alert("Please, use me..."); }, 30000);
+	</script>
+</body>
+
+</html>
