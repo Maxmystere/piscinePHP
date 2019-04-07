@@ -10,6 +10,11 @@ if ($ship->team != $board->currentplayer) {
 	exit;
 }
 $player = $board->getCurrentPlayer();
+if ($player != $_SESSION['metoken'])
+{
+	header("Location: /game.php?errorcode=wrongteam");
+	exit;
+}
 if (isset($_GET['posx']) && isset($_GET['posy']) && $_GET['move']) {
 	if ($player->move($_GET))
 		$error = true;

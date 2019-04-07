@@ -12,7 +12,11 @@ include "header.php";
 ?>
 <div style="height:1140px;display:block;">
     <div style="display:inline-block; height:100%; width:84.5%">
-        <iframe height="100%" width="100%" id="game" name="game" src="/players.php"></iframe>
+        <?php if (isset($_SESSION['ingame'])) {
+            echo '<iframe height="100%" width="100%" id="game" name="game" src="/game.php"></iframe>';
+        } else {
+            echo '<iframe height="100%" width="100%" id="proom" name="proom" src="/players.php"></iframe>';
+        }?>
     </div>
     <div style="display:inline-block; height:100%; width:14.5%; vertical-align:top;">
         <iframe scrolling="no" id="chatframe" width="100%" height="40%" src="/chat/index.php"></iframe>

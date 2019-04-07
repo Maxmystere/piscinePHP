@@ -49,24 +49,21 @@ window.onload = function () {
 	var boardWidth = board[0].length;
 	console.log("Board x: " + boardWidth + " y: " + boardHeight);
 
-	function fetchHeader(url, wch) {
-		try {
-			var req = new XMLHttpRequest();
-			req.open("HEAD", url, false);
-			req.send(null);
-			if(req.status== 200)
-			{
-				return req.getResponseHeader(wch);
+	console.log(boardtimestamp);
+
+	this.setInterval(function () {
+		console.log(sessiontoken);
+		$.ajax({
+			type: "GET",
+			url: 'game_checker.php',
+			success: function (data) {
+				if (data != boardtimestamp) {
+					window.location.reload();
+				}
 			}
-			else return false;
-		} catch(er) {
-			return er.message;
-		}
-	}
-	
-	console.log(fetchHeader(window.location.href,'Last-Modified'));
+		});
 
-
+	}, 2000);
 
 	// Draw Pretty lines
 	for (var h = canvas.height / boardHeight; h < canvas.height; h += canvas.height / boardHeight) {

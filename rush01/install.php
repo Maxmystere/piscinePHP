@@ -12,19 +12,19 @@ if (isset($_SESSION['loggued_on_user'])) {
 		unset($_SESSION['seek']);
 		$read[$login]['with'] = $_POST['login2'];
 		$read[$login]['gamefilename'] = $login . "_" .$_POST['login2'] . ".map";
+		$_SESSION['metoken'] = 0;
 		file_put_contents($file, serialize($read), LOCK_EX);
-		//echo "Waiting confirmation from ".$_POST['login2']."<br>";
+		echo "Waiting confirmation from ".$_POST['login2']."<br>";
 	} else if ($_POST['startG'] == "Accept") {
 		unset($_SESSION['seek']);
 		$read[$login]['with'] = $_POST['login1'];
 		$read[$login]['gamefilename'] = $read[$_POST['login1']]['gamefilename'];
+		$_SESSION['metoken'] = 1;
 		file_put_contents($file, serialize($read), LOCK_EX);
 	}
 }
 if (isset($read[$login]['with'])) {
 	$other = $read[$login]['with'];
-	//echo "me playing with".$read[$login]['with'];
-	//echo "other with".$read[$other]['with']." = ".$login;
 }
 
 if ($read[$other]['with'] == $login) {

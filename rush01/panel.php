@@ -13,13 +13,20 @@ if (isset($_SESSION['loggued_on_user'])) {
         $read[$login]['with'] = "";
         unset($_SESSION["ingame"]);
         file_put_contents($file, serialize($read), LOCK_EX);
+
+    } else if ($read[$read[$login]['with']]['with'] = "") {
+        $read[$login]['with'] = "";
+        unset($_SESSION["ingame"]);
+        file_put_contents($file, serialize($read), LOCK_EX);
+
     }
 }
+
 ?>
 <head><link rel="stylesheet" type="text/css" href="../css/main.css"></head>
 <form method="POST" action="panel.php">
-    <input class="input_btn" id="delP" onClick="window.location.reload()" name="delP" type="submit" value="Supprimer la partie" <?php
-if (!isset($read[$login]['with'])) {
+    <input class="input_btn" id="delP" name="delP" type="submit" value="Supprimer la partie" <?php
+if (!isset($_SESSION['ingame'])) {
     echo "hidden";
 }?>
 ></form>

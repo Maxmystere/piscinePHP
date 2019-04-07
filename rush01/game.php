@@ -1,4 +1,5 @@
-<?php session_start();
+<?php
+session_start();
 require_once 'Board.class.php';
 $read = unserialize(file_get_contents("private/games"));
 $tmp = unserialize(file_get_contents("private/" . $read[$_SESSION['loggued_on_user']]['gamefilename']));
@@ -12,6 +13,7 @@ if (!$tmp) {
 	<html lang="en">
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="index.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script type="text/javascript" src="canvas.js"></script>
 	<title>Warhammer 40K</title>
 </head>
@@ -20,6 +22,8 @@ if (!$tmp) {
 
 	<script type="text/javascript">
 		var board = <?PHP $tmp->getJsonBoard(); ?>;
+		var boardtimestamp = <?PHP echo filemtime("private/" . $read[$_SESSION['loggued_on_user']]['gamefilename']); ?>;
+		var sessiontoken = <?PHP echo json_encode($_SESSION); ?>;
 	</script>
 	<div class="form-popup" id="myForm">
 		<button type="submit" class="btn cancel" onclick="closeForm()">X</button>
@@ -56,7 +60,14 @@ if (!$tmp) {
 	</div>
 	<script type="text/javascript">
 		var statstab = <?PHP $tmp->getCurrentStats(); ?>;
-		document.getElementById('currentplayerstat').innerHTML = "player" + statstab['currentp'];
+		
+		if (statstab['currentp'] == <?PHP echo $_SESSION['metoken']; ?>)
+		{
+			document.getElementById('currentplayerstat').innerHTML = '<?PHP echo $read[$_SESSION['loggued_on_user']]['with']; ?>' + " is playing";
+		}
+		else
+			document.getElementById('currentplayerstat').innerHTML = '<?PHP echo $read[$_SESSION['loggued_on_user']]['name']; ?>' + " is playing";
+
 		document.getElementById('ppleftstat').innerHTML = "PP left " + statstab['ppleft'];
 	</script>
 </body>

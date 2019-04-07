@@ -205,7 +205,8 @@ class Board
 		if (!$tmp['ppleft']) {
 			$this->changePlayer();
 			$tmp['ppleft'] = $this->getPPLeft();
-			$_SESSION['board'] = serialize($this);
+			$read = unserialize(file_get_contents("private/games"));
+			file_put_contents("private/" . $read[$_SESSION['loggued_on_user']]['gamefilename'], serialize($this), LOCK_EX);
 		}
 		$tmp['currentp'] = $this->currentplayer;
 		echo json_encode($tmp);
