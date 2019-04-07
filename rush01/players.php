@@ -20,15 +20,17 @@ if (isset($_SESSION['loggued_on_user'])) {
         $read[$login]['seek'] = 0;
         file_put_contents($file, serialize($read), LOCK_EX);
     } 
-    if (!isset($_SESSION['ingame'])) {
+    if ($_SESSION['seek'] == 1) {
         echo "<h4>Demande de connexion</h4>";
-        foreach ($read as $user_array) {
-            if ($user_array['with'] == $login) {
-                echo '<form method="POST" action="install.php">';
-                echo '<input class="input_btn" id="startG" name="startG" type="submit" value="Accept">';
-                echo '<input id="login1" name="login1" value="'.$user_array['name'].'" hidden>';
-                echo '<input id="login2" name="login2" value="'.$login.'" hidden>';
-                echo $user_array['name']."<br></form>";
+        if ($read != "") {
+            foreach ($read as $user_array) {
+                if ($user_array['with'] == $login) {
+                    echo '<form method="POST" action="install.php">';
+                    echo '<input class="input_btn" id="startG" name="startG" type="submit" value="Accept">';
+                    echo '<input id="login1" name="login1" value="'.$user_array['name'].'" hidden>';
+                    echo '<input id="login2" name="login2" value="'.$login.'" hidden>';
+                    echo $user_array['name']."<br></form>";
+                }
             }
         }
     }

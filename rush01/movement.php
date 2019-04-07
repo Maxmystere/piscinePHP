@@ -1,7 +1,9 @@
 <?php
 session_start();
 require_once 'Board.class.php';
-$board = unserialize($_SESSION['board']);
+
+$read = unserialize(file_get_contents("private/games"));
+$board = unserialize(file_get_contents("private/" . $read[$_SESSION['loggued_on_user']]['gamefilename']));
 $ship = $board->getShipAtLocation($_GET);
 if ($ship->team != $board->currentplayer) {
 	header("Location: /game.php?errorcode=wrongteam");

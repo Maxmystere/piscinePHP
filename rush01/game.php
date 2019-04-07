@@ -1,7 +1,7 @@
 <?php session_start();
 require_once 'Board.class.php';
-print_r($_SESSION);
-$tmp = unserialize($_SESSION['board']);
+$read = unserialize(file_get_contents("private/games"));
+$tmp = unserialize(file_get_contents("private/" . $read[$_SESSION['loggued_on_user']]['gamefilename']));
 if (!$tmp) {
 	header("Location: /install.php");
 	exit;

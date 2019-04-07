@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!file_exists("/private")) {
+    mkdir("/private");
+    file_put_contents("/private/.htaccess", "Deny from all");
+}
 if (!isset($_SESSION['loggued_on_user'])) {
     header("Location: /login/login.php");
     exit;
