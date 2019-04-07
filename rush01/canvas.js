@@ -38,15 +38,35 @@ window.onload = function () {
 
 	var canvas = document.getElementById("canvas");
 	var ctx = canvas.getContext("2d");
-	var boardHeight = board.length;
-	var boardWidth = board[0].length;
-	console.log("Board x: " + boardWidth + " y: " + boardHeight);
 
 	if (typeof board === 'undefined') {
 		console.log("NOT DEFINED");
 		window.location.replace("install.php");
 		return;
 	}
+
+	var boardHeight = board.length;
+	var boardWidth = board[0].length;
+	console.log("Board x: " + boardWidth + " y: " + boardHeight);
+
+	function fetchHeader(url, wch) {
+		try {
+			var req = new XMLHttpRequest();
+			req.open("HEAD", url, false);
+			req.send(null);
+			if(req.status== 200)
+			{
+				return req.getResponseHeader(wch);
+			}
+			else return false;
+		} catch(er) {
+			return er.message;
+		}
+	}
+	
+	console.log(fetchHeader(window.location.href,'Last-Modified'));
+
+
 
 	// Draw Pretty lines
 	for (var h = canvas.height / boardHeight; h < canvas.height; h += canvas.height / boardHeight) {

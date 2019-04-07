@@ -150,7 +150,7 @@ class Player
 		$this->cleanShipAtLocation($x, $y, $rot, $shipsize);
 		if (!$this->checkShipMove($tmpship, $x, $y, $rot, $shipsize, $kwargs['move']) || !$tmpship->useEnergy($kwargs['move'])) {
 			$this->putShipAtLocation($tmpship, $x, $y, $rot, $shipsize);
-			return ("needEnergy");
+			return (true);
 		}
 		$tmpship->moveForward($kwargs['move']);
 		if ($rot == 1) {
@@ -162,6 +162,7 @@ class Player
 		} else if ($rot == 4) {
 			$this->putShipAtLocation($tmpship, $x - $kwargs['move'], $y, $rot, $shipsize);
 		}
+		return (false);
 	}
 	function rotateLeft(array $kwargs)
 	{
