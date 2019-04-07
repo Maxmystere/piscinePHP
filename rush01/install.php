@@ -14,7 +14,7 @@ if (isset($_SESSION['loggued_on_user'])) {
 		$read[$login]['gamefilename'] = $login . "_" .$_POST['login2'] . ".map";
 		$_SESSION['metoken'] = 0;
 		file_put_contents($file, serialize($read), LOCK_EX);
-		echo "Waiting confirmation from ".$_POST['login2']."<br>";
+		//echo "Waiting confirmation from ".$_POST['login2']."<br>";
 	} else if ($_POST['startG'] == "Accept") {
 		unset($_SESSION['seek']);
 		$read[$login]['with'] = $_POST['login1'];

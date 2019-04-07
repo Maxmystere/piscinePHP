@@ -3,7 +3,7 @@
 class Player
 {
 	protected $shipsarray;
-	private $id;
+	public $id;
 	private $boardclass;
 	function __construct(array $kwargs)
 	{

@@ -10,9 +10,9 @@ if ($ship->team != $board->currentplayer) {
 	exit;
 }
 $player = $board->getCurrentPlayer();
-if ($player != $_SESSION['metoken'])
+if ($player->id != $_SESSION['metoken'])
 {
-	header("Location: /game.php?errorcode=wrongteam");
+	header("Location: /game.php?errorcode=wrongtoken" . $player->id);
 	exit;
 }
 if (isset($_GET['posx']) && isset($_GET['posy']) && $_GET['move']) {
