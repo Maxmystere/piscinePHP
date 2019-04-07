@@ -7,21 +7,18 @@ if (!file_exists($file)) {
 $read = unserialize(file_get_contents($file));
 if (isset($_SESSION['loggued_on_user'])) {
     $login = $_SESSION['loggued_on_user'];
+    $login2 = $read[$login]['with'];
     if (isset($_POST['delP'])) {
-        $login2 = $read[$login]['with'];
         $read[$login2]['with'] = "";
         $read[$login]['with'] = "";
         unset($_SESSION["ingame"]);
         file_put_contents($file, serialize($read), LOCK_EX);
-
-    } else if ($read[$read[$login]['with']]['with'] = "") {
+    } else if ($read[$login2]['with'] = "") {
         $read[$login]['with'] = "";
         unset($_SESSION["ingame"]);
         file_put_contents($file, serialize($read), LOCK_EX);
-
     }
 }
-
 ?>
 <head><link rel="stylesheet" type="text/css" href="../css/main.css"></head>
 <form method="POST" action="panel.php">
