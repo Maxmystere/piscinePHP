@@ -27,7 +27,7 @@ if ($_POST['submit'] == 'OK' && $_POST['login'] && $_POST['oldpw'] && $_POST['ne
     }
 }
 ?>
-<html><body>
+<div class="content">
   <form method="POST" action="modif.php">
     <h1>Modification du mot de passe</h1>
     <p>Identifiant: <input id="1" type="text" name="login" value=""/> <br>
@@ -35,5 +35,6 @@ if ($_POST['submit'] == 'OK' && $_POST['login'] && $_POST['oldpw'] && $_POST['ne
       Nouveau mot de passe: <input id="3" type="password" name="newpw" value=""/><br>
       <input id="4" type="submit" name="submit" value="OK"></p>
   </form>
+</div>
 </body></html>
   

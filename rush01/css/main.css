@@ -5,6 +5,10 @@ body {
     min-width: 1950px;
 }
 
+.content {
+    padding: 20px 20px;
+}
+
 #lform {
     text-align: center;
     align-content: center;

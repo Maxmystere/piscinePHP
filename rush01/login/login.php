@@ -13,6 +13,7 @@ if (isset($_POST['login']) && isset($_POST['passwd']) && auth($_POST['login'], $
 }
 include "../header.php";
 ?>
+<div class="content">
 <form class="lform" method="POST" action="login.php">
     <h1>Connexion &agrave 42Battlenet</h1>
     <p>Identifiant: <input id="1" type="text" name="login" autocomplete="username" value=""/> <br>
@@ -21,5 +22,6 @@ include "../header.php";
   </form>
   <a href="create.php">Cr&eacuteer un compte</a><br>
   <a href="modif.php">Modifier son mot de passe</a><br>
+</div>
 </body></html>
   

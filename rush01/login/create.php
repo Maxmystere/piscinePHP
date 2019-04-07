@@ -27,12 +27,13 @@ if ($_POST['submit'] == 'OK' && isset($_POST['login']) && isset($_POST['passwd']
 }
 include "../header.php";
 ?>
+<div class="content">
     <form method="POST" action="create.php">
     <h1>Cr&eacuteation de compte utilisateur</h1>
     <p>Identifiant: <input id="1" type="text" name="login" value=""/> <br>
       Mot de passe: <input id="2" type="password" name="passwd" value=""/><br>
       <input id="3" type="submit" name="submit" value="OK"></p>
     </form>
-    </body>
-    </html>
+</div>
+</body></html>
 
