@@ -10,8 +10,8 @@ class Board
 	public $currentplayer;
 	public $player1;
 	public $player2;
-	public $x = 150;
-	public $y = 100;
+	public $x = 40;
+	public $y = 40;
 	public $board;
 	function __construct()
 	{
@@ -31,8 +31,8 @@ class Board
 			}
 		}
 
-		$this->initFleet(array('team' => 0, 'player' => $this->player1, 'x' => 15, 'y' => 4));
-		$this->initFleet(array('team' => 1, 'player' => $this->player2, 'x' => 10, 'y' => 12));
+		$this->initFleet(array('team' => 0, 'player' => $this->player1, 'x' => 20, 'y' => 12));
+		$this->initFleet(array('team' => 1, 'player' => $this->player2, 'x' => 10, 'y' => 18));
 	}
 	private function initFleet(array $kwargs)
 	{

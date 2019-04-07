@@ -63,13 +63,13 @@ class Ship implements IShip
 		{
 			$this->rot = $newrot;
 			if ($this->rot == 1)
-				$this->y -= $this->length / 2;
+				$this->y -= floor($this->length / 3);
 			else if ($this->rot == 2)
-				$this->x += $this->length / 2;
+				$this->x += floor($this->length / 3);
 			else if ($this->rot == 3)
-				$this->y += $this->length / 2;
+				$this->y += floor($this->length / 3);
 			else if ($this->rot == 4)
-				$this->x -= $this->length / 2;
+				$this->x -= floor($this->length / 3);
 		}
 	}
 	function moveForward($trust)
@@ -85,9 +85,9 @@ class Ship implements IShip
 	}
 	function useEnergy($needpp)
 	{
-		if ($needpp <= $this->pp)
+		if (abs($needpp) <= $this->pp)
 		{
-			$this->pp -= $needpp;
+			$this->pp -= abs($needpp);
 			return (true);
 		}
 		return (false);
@@ -103,6 +103,10 @@ class Ship implements IShip
 	function setID($id)
 	{
 		$this->id = $id;
+	}
+	function getID()
+	{
+		return ($this->id);
 	}
 	function setteam($team)
 	{

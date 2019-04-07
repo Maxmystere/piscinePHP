@@ -1,5 +1,6 @@
 <?php session_start();
 require_once 'Board.class.php';
+print_r($_SESSION);
 $tmp = unserialize($_SESSION['board']);
 if (!$tmp) {
 	header("Location: /install.php");
@@ -15,7 +16,7 @@ if (!$tmp) {
 	<title>Warhammer 40K</title>
 </head>
 <body>
-	<canvas id="canvas" width="3000" height="2000"></canvas>
+	<canvas id="canvas" width="1200" height="1200"></canvas>
 
 	<script type="text/javascript">
 		var board = <?PHP $tmp->getJsonBoard(); ?>;
@@ -32,7 +33,7 @@ if (!$tmp) {
 			<input type='hidden' id='shipposxform' name='posx' value='0' />
 			<input type='hidden' id='shipposyform' name='posy' value='0' />
 			<input type='hidden' id='shipidform' name='id' value='-1' />
-			Moveforward : <input type='number' id='move' name='move' value='1' min="1" />
+			Move : <input type='number' id='move' name='move' value='1'/>
 			<button type="submit" class="btn">Ziouu</button>
 		</form>
 		<button type="button" onclick="location.href='/movement.php?rotate=left&id='
@@ -43,6 +44,10 @@ if (!$tmp) {
 			+ document.getElementById('shipidform').value + '&posx='
 			+ document.getElementById('shipposxform').value + '&posy='
 			+ document.getElementById('shipposyform').value;">Rotate Right</button>
+		<button type="button" onclick="location.href='/movement.php?shoot=forward&id='
+			+ document.getElementById('shipidform').value + '&posx='
+			+ document.getElementById('shipposxform').value + '&posy='
+			+ document.getElementById('shipposyform').value;">Shoot Forward</button>
 	</div>
 	<div class="stat-popup" id="myStats">
 	<button type="button" onclick="location.href='/install.php';">Restart</button>
@@ -51,8 +56,6 @@ if (!$tmp) {
 	</div>
 	<script type="text/javascript">
 		var statstab = <?PHP $tmp->getCurrentStats(); ?>;
-
-		//console.log(statstab);
 		document.getElementById('currentplayerstat').innerHTML = "player" + statstab['currentp'];
 		document.getElementById('ppleftstat').innerHTML = "PP left " + statstab['ppleft'];
 	</script>

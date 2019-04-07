@@ -53,113 +53,113 @@ class Player
 			$this->boardclass->board[$y][$x] = $tmpship;
 		}
 	}
-	private function checkShipAtLocation($x, $y, $rot, $shipsize)
+	private function checkShipMove($ship, $x, $y, $rot, $shipsize, $trust)
 	{
+		$xhome = $x;
+		$yhome = $y;
 		if ($rot == 1) {
+			$y -= $trust;
 			for ($ytmp = $y; $ytmp < $y + $shipsize['l']; $ytmp++) {
 				for ($xtmp = $x; $xtmp < $x + $shipsize['w']; $xtmp++) {
-					if ($this->boardclass->board[$ytmp][$xtmp] || $xtmp < 0 || $ytmp < 0
-						|| $xtmp > $this->boardclass->x || $ytmp > $this->boardclass->y)
-						return(false);
+					if ($xtmp < 0 || $ytmp < 0 || $xtmp > $this->boardclass->x || $ytmp > $this->boardclass->y || $this->boardclass->board[$ytmp][$xtmp]) {
+						return (false);
+					}
 				}
 			}
 			$this->boardclass->board[$y][$x] = $tmpship;
 		} else if ($rot == 2) {
+			$x += $trust;
 			for ($ytmp = $y; $ytmp < $y + $shipsize['w']; $ytmp++) {
 				for ($xtmp = $x; $xtmp > $x - $shipsize['l']; $xtmp--) {
-					if ($this->boardclass->board[$ytmp][$xtmp])
-						return(false);
+					if ($xtmp < 0 || $ytmp < 0 || $xtmp > $this->boardclass->x || $ytmp > $this->boardclass->y || $this->boardclass->board[$ytmp][$xtmp]) {
+						return (false);
+					}
 				}
 			}
 			$this->boardclass->board[$y][$x] = $tmpship;
 		} else if ($rot == 3) {
+			$y += $trust;
 			for ($ytmp = $y; $ytmp > $y - $shipsize['l']; $ytmp--) {
 				for ($xtmp = $x; $xtmp > $x - $shipsize['w']; $xtmp--) {
-					if ($this->boardclass->board[$ytmp][$xtmp])
-						return(false);
+					if ($xtmp < 0 || $ytmp < 0 || $xtmp > $this->boardclass->x || $ytmp > $this->boardclass->y || $this->boardclass->board[$ytmp][$xtmp]) {
+						return (false);
+					}
 				}
 			}
 			$this->boardclass->board[$y][$x] = $tmpship;
 		} else if ($rot == 4) {
+			$x -= $trust;
 			for ($ytmp = $y; $ytmp > $y - $shipsize['w']; $ytmp--) {
 				for ($xtmp = $x; $xtmp < $x + $shipsize['l']; $xtmp++) {
-					if ($this->boardclass->board[$ytmp][$xtmp])
-						return(false);
+					if ($xtmp < 0 || $ytmp < 0 || $xtmp > $this->boardclass->x || $ytmp > $this->boardclass->y || $this->boardclass->board[$ytmp][$xtmp]) {
+						return (false);
+					}
 				}
 			}
-			return (true);
 		}
+		return (true);
 	}
 	private function cleanShipAtLocation($x, $y, $rot, $shipsize)
 	{
 		if ($rot == 1) {
 			for ($ytmp = $y; $ytmp < $y + $shipsize['l']; $ytmp++) {
 				for ($xtmp = $x; $xtmp < $x + $shipsize['w']; $xtmp++) {
-					$this->boardclass->board[$ytmp][$xtmp] = array('x' => $x, 'y' => $y);
+					$this->boardclass->board[$ytmp][$xtmp] = 0;
 				}
 			}
 			$this->boardclass->board[$y][$x] = $tmpship;
 		} else if ($rot == 2) {
 			for ($ytmp = $y; $ytmp < $y + $shipsize['w']; $ytmp++) {
 				for ($xtmp = $x; $xtmp > $x - $shipsize['l']; $xtmp--) {
-					$this->boardclass->board[$ytmp][$xtmp] = array('x' => $x, 'y' => $y);
+					$this->boardclass->board[$ytmp][$xtmp] = 0;
 				}
 			}
 			$this->boardclass->board[$y][$x] = $tmpship;
 		} else if ($rot == 3) {
 			for ($ytmp = $y; $ytmp > $y - $shipsize['l']; $ytmp--) {
 				for ($xtmp = $x; $xtmp > $x - $shipsize['w']; $xtmp--) {
-					$this->boardclass->board[$ytmp][$xtmp] = array('x' => $x, 'y' => $y);
+					$this->boardclass->board[$ytmp][$xtmp] = 0;
 				}
 			}
 			$this->boardclass->board[$y][$x] = $tmpship;
 		} else if ($rot == 4) {
 			for ($ytmp = $y; $ytmp > $y - $shipsize['w']; $ytmp--) {
 				for ($xtmp = $x; $xtmp < $x + $shipsize['l']; $xtmp++) {
-					$this->boardclass->board[$ytmp][$xtmp] = array('x' => $x, 'y' => $y);
+					$this->boardclass->board[$ytmp][$xtmp] = 0;
 				}
 			}
 			$this->boardclass->board[$y][$x] = $tmpship;
 		}
+	}
+	function shoot(array $kwargs)
+	{
+		$x = $kwargs['posx'];
+		$y = $kwargs['posy'];
+		$tmpship = $this->boardclass->board[$y][$x];
+		$rot = $tmpship->getrotation();
+		$shipsize = $tmpship->getSize();
+		
 	}
 	function move(array $kwargs)
 	{
 		$x = $kwargs['posx'];
 		$y = $kwargs['posy'];
 		$tmpship = $this->boardclass->board[$y][$x];
-		if (!$tmpship->useEnergy($kwargs['move'])) {
-			return ("needEnergy");
-		}
 		$rot = $tmpship->getrotation();
 		$shipsize = $tmpship->getSize();
+		$this->cleanShipAtLocation($x, $y, $rot, $shipsize);
+		if (!$this->checkShipMove($tmpship, $x, $y, $rot, $shipsize, $kwargs['move']) || !$tmpship->useEnergy($kwargs['move'])) {
+			$this->putShipAtLocation($tmpship, $x, $y, $rot, $shipsize);
+			return ("needEnergy");
+		}
 		$tmpship->moveForward($kwargs['move']);
 		if ($rot == 1) {
-			for ($ytmp = $y; $ytmp < $y + $shipsize['l']; $ytmp++) {
-				for ($xtmp = $x; $xtmp < $x + $shipsize['w']; $xtmp++) {
-					$this->boardclass->board[$ytmp][$xtmp] = 0;
-				}
-			}
 			$this->putShipAtLocation($tmpship, $x, $y - $kwargs['move'], $rot, $shipsize);
 		} else if ($rot == 2) {
-			for ($ytmp = $y; $ytmp < $y + $shipsize['w']; $ytmp++) {
-				for ($xtmp = $x; $xtmp > $x - $shipsize['l']; $xtmp--) {
-					$this->boardclass->board[$ytmp][$xtmp] = 0;
-				}
-			}
 			$this->putShipAtLocation($tmpship, $x + $kwargs['move'], $y, $rot, $shipsize);
 		} else if ($rot == 3) {
-			for ($ytmp = $y; $ytmp > $y - $shipsize['l']; $ytmp--) {
-				for ($xtmp = $x; $xtmp > $x - $shipsize['w']; $xtmp--) {
-					$this->boardclass->board[$ytmp][$xtmp] = 0;
-				}
-			}
 			$this->putShipAtLocation($tmpship, $x, $y + $kwargs['move'], $rot, $shipsize);
 		} else if ($rot == 4) {
-			for ($ytmp = $y; $ytmp > $y - $shipsize['w']; $ytmp--) {
-				for ($xtmp = $x; $xtmp < $x + $shipsize['l']; $xtmp++) {
-					$this->boardclass->board[$ytmp][$xtmp] = 0;
-				}
-			}
 			$this->putShipAtLocation($tmpship, $x - $kwargs['move'], $y, $rot, $shipsize);
 		}
 	}
@@ -173,38 +173,19 @@ class Player
 		}
 		$rot = $tmpship->getrotation();
 		$shipsize = $tmpship->getSize();
-		$shiplen = $shipsize['l'] / 2;
+		$shiplen = floor($shipsize['l'] / 3);
+		$this->cleanShipAtLocation($x, $y, $rot, $shipsize);
 		if ($rot == 1) {
 			$tmpship->setRotation(4);
-			for ($ytmp = $y; $ytmp < $y + $shipsize['l']; $ytmp++) {
-				for ($xtmp = $x; $xtmp < $x + $shipsize['w']; $xtmp++) {
-					$this->boardclass->board[$ytmp][$xtmp] = 0;
-				}
-			}
 			$this->putShipAtLocation($tmpship, $x - $shiplen, $y, 4, $shipsize);
 		} else if ($rot == 2) {
 			$tmpship->setRotation(1);
-			for ($ytmp = $y; $ytmp < $y + $shipsize['w']; $ytmp++) {
-				for ($xtmp = $x; $xtmp > $x - $shipsize['l']; $xtmp--) {
-					$this->boardclass->board[$ytmp][$xtmp] = 0;
-				}
-			}
 			$this->putShipAtLocation($tmpship, $x, $y - $shiplen, 1, $shipsize);
 		} else if ($rot == 3) {
 			$tmpship->setRotation(2);
-			for ($ytmp = $y; $ytmp > $y - $shipsize['l']; $ytmp--) {
-				for ($xtmp = $x; $xtmp > $x - $shipsize['w']; $xtmp--) {
-					$this->boardclass->board[$ytmp][$xtmp] = 0;
-				}
-			}
 			$this->putShipAtLocation($tmpship, $x + $shiplen, $y, 2, $shipsize);
 		} else if ($rot == 4) {
 			$tmpship->setRotation(3);
-			for ($ytmp = $y; $ytmp > $y - $shipsize['w']; $ytmp--) {
-				for ($xtmp = $x; $xtmp < $x + $shipsize['l']; $xtmp++) {
-					$this->boardclass->board[$ytmp][$xtmp] = 0;
-				}
-			}
 			$this->putShipAtLocation($tmpship, $x, $y + $shiplen, 3, $shipsize);
 		}
 	}
@@ -218,38 +199,19 @@ class Player
 		}
 		$rot = $tmpship->getrotation();
 		$shipsize = $tmpship->getSize();
-		$shiplen = $shipsize['l'] / 2;
+		$shiplen = floor($shipsize['l'] / 3);
+		$this->cleanShipAtLocation($x, $y, $rot, $shipsize);
 		if ($rot == 1) {
 			$tmpship->setRotation(2);
-			for ($ytmp = $y; $ytmp < $y + $shipsize['l']; $ytmp++) {
-				for ($xtmp = $x; $xtmp < $x + $shipsize['w']; $xtmp++) {
-					$this->boardclass->board[$ytmp][$xtmp] = 0;
-				}
-			}
 			$this->putShipAtLocation($tmpship, $x + $shiplen, $y, 2, $shipsize);
 		} else if ($rot == 2) {
 			$tmpship->setRotation(3);
-			for ($ytmp = $y; $ytmp < $y + $shipsize['w']; $ytmp++) {
-				for ($xtmp = $x; $xtmp > $x - $shipsize['l']; $xtmp--) {
-					$this->boardclass->board[$ytmp][$xtmp] = 0;
-				}
-			}
 			$this->putShipAtLocation($tmpship, $x, $y + $shiplen, 3, $shipsize);
 		} else if ($rot == 3) {
 			$tmpship->setRotation(4);
-			for ($ytmp = $y; $ytmp > $y - $shipsize['l']; $ytmp--) {
-				for ($xtmp = $x; $xtmp > $x - $shipsize['w']; $xtmp--) {
-					$this->boardclass->board[$ytmp][$xtmp] = 0;
-				}
-			}
 			$this->putShipAtLocation($tmpship, $x - $shiplen, $y, 4, $shipsize);
 		} else if ($rot == 4) {
 			$tmpship->setRotation(1);
-			for ($ytmp = $y; $ytmp > $y - $shipsize['w']; $ytmp--) {
-				for ($xtmp = $x; $xtmp < $x + $shipsize['l']; $xtmp++) {
-					$this->boardclass->board[$ytmp][$xtmp] = 0;
-				}
-			}
 			$this->putShipAtLocation($tmpship, $x, $y - $shiplen, 1, $shipsize);
 		}
 	}

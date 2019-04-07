@@ -59,12 +59,36 @@ window.onload = function () {
 	}
 	ctx.stroke();
 
+	canvas.addEventListener('click', function (event) {
+		var x = event.pageX - event.pageX % (canvas.height / boardHeight);
+		var y = event.pageY - event.pageY % (canvas.height / boardHeight);
+		var curx = Math.round(x / (canvas.height / boardHeight));
+		var cury = Math.round(y / (canvas.width / boardWidth));
+		//drawSmallShip(canvas, ctx, image, x, y, 4);
+		console.log("Click x : " + curx + " y : " + cury);
+		console.log(board[cury][curx]);
+		if (board[cury][curx]) {
+			var tmp = board[board[cury][curx]['y']][board[cury][curx]['x']];
+			document.getElementById("myForm").style.display = "block";
+			document.getElementById("shipnameform").innerHTML = tmp['name'];
+			document.getElementById("shiphpform").innerHTML = tmp['hp'] + " / " + tmp['maxhp'] + " HP";
+			document.getElementById("shippowerform").innerHTML = tmp['pp'] + " / " + tmp['maxpp'] + " PP";
+			document.getElementById("shipspeedform").innerHTML = tmp['speed'] + " km/h";
+			document.getElementById('shipposform').innerHTML = "x: " + tmp['x'] + " y: " + tmp['y'] + " team: " + tmp['team'] + " id: " + tmp['id'];
+			document.getElementById('shipposxform').value = tmp['x'];
+			document.getElementById('shipposyform').value = tmp['y'];
+			document.getElementById('shipidform').value = tmp['id'];
+		}
+		else {
+			document.getElementById("myForm").style.display = "none";
+		}
+	}, false);
+
+
 	// Draw from PHP
 	for (var ytmp = 0; ytmp < boardHeight; ytmp++) {
 		for (var xtmp = 0; xtmp < boardWidth; xtmp++) {
-			if (board[ytmp][xtmp] == 0) {
-			}
-			else {
+			if (board[ytmp][xtmp] && board[ytmp][xtmp].hasOwnProperty('imgid')) {
 				if (board[ytmp][xtmp]['imgid'] != 0) {
 					if (board[ytmp][xtmp]['rot'] == 2)
 						var boardx = (xtmp - board[ytmp][xtmp]['length'] + 1) * (canvas.width / boardWidth);
@@ -112,30 +136,7 @@ window.onload = function () {
 		}
 	}
 
-	canvas.addEventListener('click', function (event) {
-		var x = event.pageX - event.pageX % (canvas.height / boardHeight);
-		var y = event.pageY - event.pageY % (canvas.height / boardHeight);
-		var curx = Math.round(x / (canvas.height / boardHeight));
-		var cury = Math.round(y / (canvas.width / boardWidth));
-		//drawSmallShip(canvas, ctx, image, x, y, 4);
-		console.log("Click x : " + curx + " y : " + cury);
-		console.log(board[cury][curx]);
-		if (board[cury][curx]) {
-			var tmp = board[board[cury][curx]['y']][board[cury][curx]['x']];
-			document.getElementById("myForm").style.display = "block";
-			document.getElementById("shipnameform").innerHTML = tmp['name'];
-			document.getElementById("shiphpform").innerHTML = tmp['hp'] + " / " + tmp['maxhp'] + " HP";
-			document.getElementById("shippowerform").innerHTML = tmp['pp'] + " / " + tmp['maxpp'] + " PP";
-			document.getElementById("shipspeedform").innerHTML = tmp['speed'] + " km/h";
-			document.getElementById('shipposform').innerHTML = "x: " + tmp['x'] + " y: " + tmp['y'] + " team: " + tmp['team'] + " id: " + tmp['id'];
-			document.getElementById('shipposxform').value = tmp['x'];
-			document.getElementById('shipposyform').value = tmp['y'];
-			document.getElementById('shipidform').value = tmp['id'];
-		}
-		else {
-			document.getElementById("myForm").style.display = "none";
-		}
-	}, false);
+
 }
 
 function closeForm() {
