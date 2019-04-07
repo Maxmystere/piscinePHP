@@ -32,7 +32,7 @@ if (!$tmp) {
 			<input type='hidden' id='shipposxform' name='posx' value='0' />
 			<input type='hidden' id='shipposyform' name='posy' value='0' />
 			<input type='hidden' id='shipidform' name='id' value='-1' />
-			Moveforward : <input type='number' id='move' name='move' value='0' min="0" />
+			Moveforward : <input type='number' id='move' name='move' value='1' min="1" />
 			<button type="submit" class="btn">Ziouu</button>
 		</form>
 		<button type="button" onclick="location.href='/movement.php?rotate=left&id='

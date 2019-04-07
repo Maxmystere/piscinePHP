@@ -2,7 +2,7 @@
 session_start();
 if (isset($_SESSION['loggued_on_user'])) {
     echo '<iframe id="msg" name="msg" title="42BattlenetChat"  height="300px" src="chat.php"></iframe><br>';
-    if (isset($_POST['send_msg']) && $_POST['send_msg'] == 'OK') {
+    if (isset($_POST['send_msg']) && $_POST['send_msg'] == "Speak!") {
         $folder = "../private";
         $file = $folder."/chat";
         if (!file_exists($folder))
@@ -22,10 +22,10 @@ if (isset($_SESSION['loggued_on_user'])) {
 ?>
 <html><head>
 <link rel="stylesheet" type="text/css" href="../css/main.css">
-<script langage="javascript">top.frames['chat'].location = "chat.php";</script>
+
 </head>
 <body><form method="post" action="index.php">
-    Speak! <input id="msg" type="textarea" size="25" name="msg" value=""/>
-    <input id="send_msg" type="submit" name="send_msg" value="OK"/>
+    <input id="msg" type="textarea" size="25" name="msg" value=""/>
+    <input id="send_msg" type="submit" name="send_msg" value="Speak!"/>
 </form></body>
 </html>

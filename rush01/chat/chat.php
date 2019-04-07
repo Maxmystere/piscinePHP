@@ -8,3 +8,4 @@ if (file_exists($file)) {
     }
 }
 ?>
+<script>window.setInterval(function() {location.reload();}, 1500);</script>
