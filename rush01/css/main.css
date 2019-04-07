@@ -1,7 +1,13 @@
 body {
 	margin: auto;
 	background-color: antiquewhite;
-	font-family: 'Courier New', Courier, monospace;
+    font-family: 'Courier New', Courier, monospace;
+    min-width: 1950px;
+}
+
+#lform {
+    text-align: center;
+    align-content: center;
 }
 
 ul {
@@ -46,3 +52,19 @@ li a:hover {
     color: white;
 }
 
+.input_btn {
+    background-color: #333;
+    color: white;
+    text-decoration: none;
+    padding: 4px 8px;
+    margin-bottom: 0;
+    font-size: 12pt;
+    line-height: 2;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 4px;
+  }
+  
+  .input_btn:hover {
+    background-color: #0674b6;
+  }

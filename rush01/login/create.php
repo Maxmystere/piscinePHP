@@ -1,5 +1,5 @@
 <?php
-include "../header.php";
+session_start();
 foreach($_POST as $value) {
 	$value = htmlspecialchars($value);
 }
@@ -22,10 +22,10 @@ if ($_POST['submit'] == 'OK' && isset($_POST['login']) && isset($_POST['passwd']
             'passwd' => $passwd
         );
         file_put_contents($file, serialize($read), LOCK_EX);
-        echo "OK\n";
         header("Location: login.php");
     }
 }
+include "../header.php";
 ?>
     <form method="POST" action="create.php">
     <h1>Cr&eacuteation de compte utilisateur</h1>

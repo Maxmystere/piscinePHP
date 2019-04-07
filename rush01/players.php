@@ -1,29 +1,35 @@
 <?php
 session_start();
-if ($_POST['submit'] = "Rechercher un joueur" && isset($_SESSION['loggued_on_user'])) {
+$file = "private/games";
+if (!file_exists($file)) {
+    file_put_contents($file, "", LOCK_EX);
+}
+$read = unserialize(file_get_contents($file));
+if (isset($_SESSION['loggued_on_user'])) {
     $login = $_SESSION['loggued_on_user'];
-    $_SESSION['Seek'] = 1;
-    $file = "private/games";
-    if (file_exists($file)) {
+    if (isset($_POST['SeekP']) && $_POST['SeekP'] == "Rechercher un joueur" ) {
+        $_SESSION['seek'] = 1;
+        $read[$login] = array(
+            'name' => $login,
+            'seek' => 1,
+            'board' => 0);
+        file_put_contents($file, serialize($read), LOCK_EX);
+    } else if (isset($_POST['SeekP']) && $_POST['SeekP'] == "Stop") {
+        unset($_SESSION['seek']);
         $read = unserialize(file_get_contents($file));
-    } else {
-        file_put_contents($file, "", LOCK_EX);
-    }
-    $read[$login] = array(
-         'name' => $login,
-         'seek' => 1,
-         'board' => 0);
-    file_put_contents($file, serialize($read), LOCK_EX);
-    foreach ($read as $user_array) {
-        if ($user_array['seek'] == 1) {
-            echo $user_array['name']."<br>";
+        $read[$login]['seek'] = 0;
+        file_put_contents($file, serialize($read), LOCK_EX);
+    } 
+    if (isset($_SESSION['seek']) && $_SESSION['seek'] == 1) { 
+        echo "<h4>Joueurs Connect&eacutes</h4>";
+        foreach ($read as $user_array) {
+            if ($user_array['seek'] == 1 && $user_array['name'] != $login) {
+                echo '<input class="input_btn" id="startG" name=startG" type="submit" value="Play with">';
+                echo $user_array['name']."<br>";
+            }
         }
     }
-} else if ($_POST['submit'] = "Stop" && isset($_SESSION['loggued_on_user'])) {
-    $_SESSION['Seek'] = 0;
-    $read = unserialize(file_get_contents($file));
-    $read[$login]['seek'] = 0;
-    file_put_contents($file, serialize($read), LOCK_EX);
 }
 ?>
-<form method="POST" action="players.php"><input id="SeekP" name="SeekP" type="submit" value="<?php if ($_SESSION['Seek'] == 0) {echo 'Rechercher un joueur';} else { echo 'Stop';}?>"></form>
+<head><link rel="stylesheet" type="text/css" href="../css/main.css"></head>
+<hr><form method="POST" action="players.php"><input class="input_btn" id="SeekP" name="SeekP" type="submit" value="<?php if (!isset($_SESSION['seek'])) {echo "Rechercher un joueur";} else { echo "Stop";}?>"></form>

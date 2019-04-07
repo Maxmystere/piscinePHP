@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -15,7 +15,7 @@ session_start();
             <?php if(isset($_SESSION['loggued_on_user'])) {
                 
                 echo "<li><a href='/login/logout.php'>Se d&eacuteconnecter</a></li>";
-                echo "<li><a>Bonjour ".$_SESSION['loggued_on_user']."</a></li>";
+                echo "<li><a href='/login/user.php'>Bonjour ".$_SESSION['loggued_on_user']."</a></li>";
 			} else {
 				echo "<li><a href='/login/create.php'>Cr&eacuteer un compte</a></li>";
 				echo "<li><a href='/login/login.php'>Se connecter</a></li><br/>";

@@ -1,5 +1,5 @@
 <?php 
-include "../header.php";
+session_start();
 include "auth.php";
 foreach($_POST as $value) {
 	$value = htmlspecialchars($value);
@@ -11,10 +11,9 @@ if (isset($_POST['login']) && isset($_POST['passwd']) && auth($_POST['login'], $
 } else if (isset($_POST['login']) && isset($_POST['passwd'])) {
     echo "Erreur de connexion.\n";
 }
+include "../header.php";
 ?>
-
-<html><body>
-  <form class="lform" method="POST" action="login.php">
+<form class="lform" method="POST" action="login.php">
     <h1>Connexion &agrave 42Battlenet</h1>
     <p>Identifiant: <input id="1" type="text" name="login" autocomplete="username" value=""/> <br>
       Mot de passe: <input id="2" type="password" name="passwd" autocomplete="current-password" value=""/><br>
